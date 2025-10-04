@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.ac.kopo.recipe.dao.MemberDao;
+import kr.ac.kopo.recipe.model.Cook;
 import kr.ac.kopo.recipe.model.Member;
+import kr.ac.kopo.recipe.model.Step;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -29,7 +31,45 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return null;
 	}
+
+	@Override
+	public List<Cook> list() {
+		return memberDao.list();
+	}
+
+	@Override
+	public Cook detail(int recipeid) {
+		return memberDao.detail(recipeid);
+	}
+
+	@Override
+	public void update(Cook item, Step step) {
+		memberDao.update(item, step);
+	}
+
+	@Override
+	public void delete(int recipeid) {
+		memberDao.delete(recipeid);
+	}
+
+	@Override
+	public Step getStepByRecipeid(int recipeid) {
+		return memberDao.getStepByRecipeid(recipeid);
+	}
+
+	@Override
+	public Member getMemberitem(int recipeid) {
+		return memberDao.getMemberByRecipeid(recipeid);
+	}
 	
-	
-	
+	@Override
+	public Cook item(int recipeid) {
+		return memberDao.detail(recipeid);
+	}
+
+	@Override
+	public Member item(String userid) {
+		return memberDao.item(userid);
+	}
+
 }

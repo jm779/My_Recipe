@@ -5,9 +5,21 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/login.css">
 </head>
 <body>
 	<div>
+		<header style="margin-bottom:20px;">
+				<a href="">
+					<img src="${pageContext.request.contextPath}/resources/image/logo.png" alt="icon">
+				</a>
+				<h1>RecipeTime</h1>
+		
+				<div>
+					<input type="text" placeholder="검색내용" />
+					<button type="button">검색</button>
+				</div>
+		</header>
 		<div><h3>LOGIN</h3></div>
 		
 			<c:if test="${not empty loginError}">

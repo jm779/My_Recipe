@@ -7,35 +7,14 @@ public class Cook {
 	private String recipetitle;
 	private String comment;
 	private String link;
+	private List<Step> steps;
+	private String postid;
+	private String posttitle;
+	private String postviews;                               
+	private String recommend;
 	private String content;
-	private String ingridient;
-	private String tools;
-	private String tip;
-
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
-	}
-	public String getIngridient() {
-		return ingridient;
-	}
-	public void setIngridient(String ingridient) {
-		this.ingridient = ingridient;
-	}
-	public String getTools() {
-		return tools;
-	}
-	public void setTools(String tools) {
-		this.tools = tools;
-	}
-	public String getTip() {
-		return tip;
-	}
-	public void setTip(String tip) {
-		this.tip = tip;
-	}
+	private String userid;
+	
 	public int getRecipeid() {
 		return recipeid;
 	}
@@ -59,6 +38,48 @@ public class Cook {
 	}
 	public void setLink(String link) {
 		this.link = link;
+	}
+	public List<Step> getSteps() {
+		return steps;
+	}
+	public void setSteps(List<Step> steps) {
+		this.steps = steps;
+	}
+	public String getPostid() {
+		return postid;
+	}
+	public void setPostid(String postid) {
+		this.postid = postid;
+	}
+	public String getPosttitle() {
+		return posttitle;
+	}
+	public void setPosttitle(String posttitle) {
+		this.posttitle = posttitle;
+	}
+	public String getPostviews() {
+		return postviews;
+	}
+	public void setPostviews(String postviews) {
+		this.postviews = postviews;
+	}
+	public String getRecommend() {
+		return recommend;
+	}
+	public void setRecommend(String recommend) {
+		this.recommend = recommend;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 	
 }

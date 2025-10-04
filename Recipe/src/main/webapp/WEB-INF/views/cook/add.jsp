@@ -35,44 +35,51 @@
 					<div>
 						<img src="" alt="">
 						<div>
-							<button type="button">추가버튼</button>
+							<button type="button">추가</button>
 						</div>
 					</div>
 
 					<div>
 						<img src="" alt="">
 						<div>
-							<button type="button">추가버튼</button>
+							<button type="button">추가</button>
 						</div>
 					</div>
 				</div>
 				
-				<div>
-					<h2>요리순서</h1>
-					<div class="step_template">
-						<div class="step">
-							<h2>STEP</h2>
-							<button class="minus" type="button">
-								<a class="line"></a>
-							</button>
-							<input type="text" placeholder="조리내용을 적어보세요!" class="description" />
-							<img src="" alt="이미지 추가">
+				<fieldset id="steps">
+					<legend style="font-weight: bold">요리순서</legend>
+					<div class="step">
+						<h2>STEP</h2>
+						<button type="button" class="minus" onclick="removeBtn(this)" >
+							<span class="line">-</span>
+						</button>
+						<input type="text" name="steps[0].content" placeholder="조리내용을 적어보세요!"/>
+						<img src="" alt="이미지 추가">
+						<div>
 							<div>
-								<input type="text" placeholder="재료" />
-								<input type="text" placeholder="도구" />
-								<input type="text" placeholder="팁" />
+								<label>재료</label>
+								<input type="text" name="steps[0].ingredient" placeholder="재료" />
+								<button type="button" onclick="addIngre(this)">+</button>
 							</div>
-							<button class="plus">추가</button>
+							<div>
+								<input type="text" name="steps[0].tools" placeholder="도구" />
+								<button type="button" onclick="addTools(this)">+</button>
+							</div>
+							<div>
+								<input type="text" name="steps[0].tip" placeholder="팁" />
+								<button type="button" onclick="addTip(this)">+</button>
+							</div>
 						</div>
-					</div>
-				</div>	
-				
+					</div>	
+				</fieldset>
+
 				<div id="steps-container">
 					<button type="button" id="add_step_btn" >step 추가하기</button>
 				</div>
 				
 				<div>
-					<button id="send" type="submit" >제출</button>
+					<button id="send" type="submit">제출</button>
 				</div>
 			</form>
 		</div>

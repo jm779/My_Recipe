@@ -59,7 +59,7 @@ public class RootController {
 	String logout(HttpSession session) {
 		session.invalidate();
 		
-		return "redirect:";
+		return "redirect:/";
 	}
 	
 	@GetMapping("/goadd")

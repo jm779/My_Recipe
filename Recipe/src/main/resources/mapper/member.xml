@@ -8,12 +8,12 @@
 	
    	<insert id="add">
 		INSERT INTO member2
-		VALUES (#{userid}, #{userpassword}, #{name}, #{tel})
+		VALUES (#{userid}, #{userpassword}, #{name}, #{email})
 	</insert>
 	
 	<update id="update">
 		UPDATE member2
-		SET password=#{userpassword}, name=#{name}, tel=#{tel}
+		SET password=#{userpassword}, name=#{name}, email=#{email}
 		WHERE userid=#{userid}
 	</update>
 	

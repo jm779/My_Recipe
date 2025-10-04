@@ -3,10 +3,13 @@ package kr.ac.kopo.recipe.dao;
 import java.util.List;
 
 import kr.ac.kopo.recipe.model.Cook;
+import kr.ac.kopo.recipe.model.Step;
 
 public interface CookDao {
 	
-	void add(Cook cook);
+	void addCook(Cook cook);
+	
+	void addStep(Step step);
 
 	List<Cook> list();
 
@@ -18,5 +21,7 @@ public interface CookDao {
 
 	Cook detail(int recipeid);
 
+	List<Step> getStepsByRecipeid(int recipeid);
 	
+
 }

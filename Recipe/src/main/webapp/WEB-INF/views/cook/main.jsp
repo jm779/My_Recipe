@@ -20,19 +20,20 @@
 		</div>
 
 		<div>
-			<a> <img src="" alt="프로필사진">
+			<a><img src="" alt="프로필사진">
 			</a>
 		</div>
 
 		<div>
-			<a>레시피 작성하기</a> <a>알림</a>
+			<a href="${pageContext.request.contextPath}/cook/add">레시피 작성하기</a> 
+			<button onclick="alert()">알림</button>
 		</div>
 	</header>
 
 	<div class="body">
 		<div>
-			<button>수정</button>
-			<button>삭제</button>
+			<button onclick="">수정</button>
+			<button onclick="">삭제</button>
 		</div>
 
 		<div>
@@ -44,8 +45,7 @@
 		</div>
 
 		<div>
-			<label>레시피 소개</label> <input type="text"
-				placeholder="간단한 코멘트를 작성해보세요!"></input>
+			<label>레시피 소개</label> <input type="text" placeholder="간단한 코멘트를 작성해보세요!"></input>
 		</div>
 
 		<div>
@@ -98,10 +98,6 @@
 			<button type="button" id="add-ingre-btn">재료 추가</button>
 			<button type="submit">저장</button>
 		</form>
-
-
 	</div>
-
-
 </body>
 </html>

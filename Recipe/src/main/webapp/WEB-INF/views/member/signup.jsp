@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/login.css">
 </head>
 <body>
 <div>
@@ -14,6 +15,9 @@
 		<div>
 			<div><label>아이디:</label></div>
 			<div><input type="text" name="userid" /></div>
+		</div>
+		<div>
+			<button>중복확인</button>
 		</div>
 	
 		<div>
@@ -27,12 +31,12 @@
 		</div>
 		
 		<div>
-			<div><label>전화번호:</label></div>
-			<div><input type="text" name="tel" /></div>
+			<div><label>이메일:</label></div>
+			<div><input type="text" name="email" /></div>
 		</div>
 			
 		<div>
-			<div><button>회원가입</button></div>
+			<div><button>가입하기</button></div>
 			<div><a href="."><button type="button">취소</button></a></div>
 		</div>
 		</form>

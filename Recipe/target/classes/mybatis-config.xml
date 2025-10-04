@@ -5,16 +5,19 @@
 
 	<settings>
 		<setting name="mapUnderscoreToCamelCase" value="true" />
+		<setting name="jdbcTypeForNull" value="VARCHAR"/>
 	</settings>
 	
 	<typeAliases>
 		<typeAlias type="kr.ac.kopo.recipe.model.Member" alias="member" />
 		<typeAlias type="kr.ac.kopo.recipe.model.Cook" alias="cook"/>
+		<typeAlias type="kr.ac.kopo.recipe.model.Step" alias="step"/>
 	</typeAliases>
 
 	<mappers>
 		<mapper resource="mapper/member.xml"/>
-		<mapper resource="mapper/cook.xml"/>		
+		<mapper resource="mapper/cook.xml"/>
+		<mapper resource="mapper/step.xml"/>
 	</mappers>
 	
 	

@@ -3,20 +3,25 @@ package kr.ac.kopo.recipe.service;
 import java.util.List;
 
 import kr.ac.kopo.recipe.model.Cook;
+import kr.ac.kopo.recipe.model.Step;
 
 public interface CookService{
 	
-	void add(Cook cook);
+	void addCookWithStep(Cook cook, String userid);
 
 	List<Cook> list();
 
 	Cook item(int recipeid);
 
-	void update(Cook item);
+	void update(Cook item, List<Step> steps);
 
 	void delete(int recipeid);
 
 	Cook detail(int recipeid);
 
-
+	List<Step> getStepsByRecipeid(int recipeid);
+	
+//	void addCook(Cook cook);
+//	
+//	void addStep(Step step);
 }

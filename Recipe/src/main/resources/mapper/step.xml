@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="step">
+
+	<insert id="add" parameterType="step">
+		INSERT INTO step(recipeid, step_order, content, ingredient, tools, tip)
+		VALUES (#{recipeid}, #{stepOrder}, #{content}, #{ingredient}, #{tools}, #{tip})
+	</insert>
+
+	<select id="stepitem" parameterType="int" resultType="Step">
+		SELECT *
+		FROM step
+		WHERE recipeid = #{recipeid}
+		ORDER BY step_order
+	</select>
+	
+	<update id="update">
+		UPDATE step
+		SET content = #{content},
+			ingredient = #{ingredient},
+			tools = #{tools},
+			tip = #{tip}
+		WHERE stepid = #{stepid}	
+	</update>
+
+	<delete id="deleteByRecipeId" parameterType="int">
+		DELETE FROM step 
+		WHERE recipeid = #{recipeid}
+	</delete>
+
+
+</mapper>

@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -26,24 +27,29 @@
 				<%--<input type="url" id="cook-url" name="link" placeholder="https://example.com" value="${item.link}"/> --%>
 			</div>
 
-			<div>
-				<h2>요리순서</h2>
-				<div id="steps">
+			<fieldset id="steps">
+				<legend>요리순서</legend>
+
+				<c:forEach var="stepitem" items="${steps}" varStatus="status">
 					<div class="step">
-						<h2>STEP</h2>
-						<button class="minus" type="button">
-							<a class="line"></a>
-						</button>
-						<input type="text" placeholder="조리내용을 적어보세요!" class="description" />
-						<img src="" alt="이미지 추가">
+						<h2>STEP ${status.index + 1}</h2>
+						<input type="text" name="steps[${status.index}].content"
+							value="${stepitem.content}" placeholder="조리내용을 적어보세요!" />
+
 						<div>
-							<input type="text" placeholder="재료" value="${step.ingredient }" />
-							<input type="text" placeholder="도구" value="${step.tool}" />
-							<input type="text" placeholder="팁"  value="${step.tip}" />
+							<label>재료</label> <input type="text"
+								name="steps[${status.index}].ingredient"
+								value="${stepitem.ingredient}" placeholder="재료" /> <label>도구</label>
+							<input type="text" name="steps[${status.index}].tools"
+								value="${stepitem.tools}" placeholder="도구" /> <label>팁</label> <input
+								type="text" name="steps[${status.index}].tip"
+								value="${stepitem.tip}" placeholder="팁" />
 						</div>
 					</div>
-				</div>
-			</div>
+				</c:forEach>
+			</fieldset>
+
+
 		</div>
 
 		<!-- 요리 목록 테이블 만들기 -->
