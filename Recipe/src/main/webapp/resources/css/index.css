@@ -1,4 +1,7 @@
 @charset "UTF-8";
 header{
+	width: 100%;
+}
+.h1box{
 	display: flex;
 }

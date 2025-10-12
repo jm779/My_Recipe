@@ -28,4 +28,6 @@ public interface MemberService{
 
 	Member item(String userid);
 
+	boolean exists(String userid);
+
 }

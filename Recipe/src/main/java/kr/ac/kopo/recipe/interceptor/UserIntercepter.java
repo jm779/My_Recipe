@@ -20,7 +20,7 @@ public class UserIntercepter extends HandlerInterceptorAdapter {
 		if(member != null)
 			return true;
 		
-		response.sendRedirect("/login");
+		response.sendRedirect(request.getContextPath() + "/login");
 		
 		return false;
 	}

@@ -24,5 +24,7 @@ public interface MemberDao {
     void delete(int recipeid);
 
     Step getStepByRecipeid(int recipeid);
+
+	boolean exists(String userid);
 }
 

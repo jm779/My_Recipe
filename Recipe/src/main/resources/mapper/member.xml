@@ -26,4 +26,9 @@
 		SELECT * FROM member2
 		WHERE userid=#{userid}
 	</select>
+	
+	<select id="exists" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM member2 WHERE userid = #{userid}
+	</select>
+	
 </mapper>
