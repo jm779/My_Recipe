@@ -72,9 +72,4 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.item(userid);
 	}
 
-	@Override
-	public boolean exists(String userid) {
-		return memberDao.exists(userid);
-	}
-
 }

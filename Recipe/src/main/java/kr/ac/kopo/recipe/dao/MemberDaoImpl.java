@@ -63,10 +63,4 @@ public class MemberDaoImpl implements MemberDao {
 		return sql.selectOne("cook.getStepByRecipeid", recipeid);
 	}
 
-	@Override
-	public boolean exists(String userid) {
-		Integer count = sql.selectOne("member.exists", userid);
-		return count != null & count > 0;
-	}
-
 }

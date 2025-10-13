@@ -10,7 +10,6 @@
 </head>
 <body>
   <div class="container">
-
     <!-- Header -->
     <header class="d-flex justify-content-between align-items-center py-3 border-bottom">
       <div class="d-flex align-items-center gap-3">
@@ -59,9 +58,27 @@
 
     <!-- Hot Recipe -->
     <section class="mb-5">
-      <div class="d-flex justify-content-between align-items-center mb-2">
+      <div class="d-flex justify-content-between align-items-center mb-2" style="width: 100%;">
         <h4>Hot Recipe</h4>
         <a href="#">더보기</a>
+        <div class="photo-box d-flex">
+        	<div>
+        		<img src="${pageContext.request.contextPath}/resources/image/kimchi_soup.jpg" alt="김치찌개" style="width:100px;">
+        		<a><p></p></a>
+        	</div>
+        	<div>
+        		<img src="${pageContext.request.contextPath}/resources/image/bean_noodles.jpg" alt="콩국수" style="width:100px;">
+        		<a><p></p></a>
+        	</div>
+        	<div>
+        		<img src="${pageContext.request.contextPath}/resources/image/Dak-galbi.jpg" alt="닭갈비" style="width:100px;">
+        		<a><p></p></a>
+        	</div>
+        	<div>
+        		<img src="${pageContext.request.contextPath}/resources/image/tteokbokki.jpg" alt="떡볶이" style="width:100px;">
+        		<a><p></p></a>
+        	</div>
+        </div>
       </div>
       <div class="row row-cols-1 row-cols-md-3 g-4">
         <c:forEach var="item" items="${hotList}">
@@ -77,14 +94,32 @@
       </div>
     </section>
 
-    <!-- Best Recipe -->
-    <section class="mb-5">
-      <div class="d-flex justify-content-between align-items-center mb-2">
+
+	<section class="mb-5">
+      <div class="d-flex justify-content-between align-items-center mb-2" style="width: 100%;">
         <h4>Best Recipe</h4>
         <a href="#">더보기</a>
+        <div class="photo-box d-flex">
+        	<div>
+        		<img src="${pageContext.request.contextPath}/resources/image/mushroom_rice.jpg" alt="버섯볶음밥" style="width: 100px" >
+        		<a><p></p></a>
+        	</div>
+        	<div>
+        		<img src="${pageContext.request.contextPath}/resources/image/dakbal.jpg" alt="닭발" style="width: 100px" >
+        		<a><p></p></a>
+        	</div>
+        	<div>
+        		<img src="${pageContext.request.contextPath}/resources/image/cold_noodles.jpg" alt="냉면" style="width: 100px" >
+        		<a><p></p></a>
+        	</div>
+        	<div>
+        		<img src="${pageContext.request.contextPath}/resources/image/toast.jpg" alt="토스트" style="width: 100px" >
+        		<a><p></p></a>
+        	</div>
+        </div>
       </div>
       <div class="row row-cols-1 row-cols-md-3 g-4">
-        <c:forEach var="item" items="${bestList}">
+        <c:forEach var="item" items="${hotList}">
           <div class="col">
             <div class="card h-100">
               <div class="card-img-top" style="height:200px; background-size:cover; background-image:url('${pageContext.request.contextPath}/resources/image/${item.image}');"></div>
@@ -97,11 +132,18 @@
       </div>
     </section>
 
+
     <!-- Best Chef -->
     <section class="mb-5">
       <div class="d-flex justify-content-between align-items-center mb-2">
         <h4>Best Chef</h4>
         <a href="#">더보기</a>
+        <div class="photo-box">
+        	<div><img src="${pageContext.request.contextPath}/resources/image/" alt="" ></div>
+        	<div><img src="${pageContext.request.contextPath}/resources/image/" alt="" ></div>
+        	<div><img src="${pageContext.request.contextPath}/resources/image/" alt="" ></div>
+        	<div><img src="${pageContext.request.contextPath}/resources/image/" alt="" ></div>
+        </div>
       </div>
       <div class="row row-cols-1 row-cols-md-3 g-4">
         <c:forEach var="chef" items="${chefList}">

@@ -10,10 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import kr.ac.kopo.recipe.model.Cook;
@@ -85,12 +82,6 @@ public class MemberController {
 		memberService.delete(recipeid);
 		return "redirect:/cook/list";
 	}
-	
-	@GetMapping("/member/idCheck")
-	@ResponseBody
-	public String idCheck(@RequestParam String userid) {
-		boolean exists = memberService.exists(userid);
-		return exists ? "이미 사용 중인 아이디 입니다." : "사용 가능한 아이디 입니다.";
-	}
+
 	
 }

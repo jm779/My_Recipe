@@ -1,7 +1,19 @@
 @charset "UTF-8";
 header{
-	width: 100%;
-}
-.h1box{
 	display: flex;
+}
+.photo-box{
+	display: flex;
+	gap: 10px;
+	flex-wrap: wrap;
+	align-content: center;
+	justify-content: start;
+	margin-top: 10px;
+}
+.photo-box img{
+	width: 100px;
+	height: 100px;
+	object-fit: cover;
+	border-radius: 8px;
+	display: block;
 }

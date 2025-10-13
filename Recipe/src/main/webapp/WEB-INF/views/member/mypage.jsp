@@ -3,23 +3,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title></title>
-<script src="${pageContext.request.contextPath}/js/delete.js"></script>
+	<meta charset="UTF-8">
+	<title></title>
+	<script src="${pageContext.request.contextPath}/js/delete.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-	<div id="profile_box">
-		<img id="profile_img" src="${pageContext.request.contextPath}/resources/image/profile.png" alt="profile">
-	
-		<div id="profile_menu">
-			<a href="${pageContext.request.contextPath}/member/mypage">회원정보 수정</a>
-			<a href="${pageContext.request.contextPath}/js/add.js">알림</a>
-			<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
-			<div class="line"></div>
-			<div><button class="plus"></button></div>
-			<p>팔로워</p><p>팔로잉</p>
+	<div class="profile">
+		<jsp:include page="/WEB-INF/views/include/head.jsp"></jsp:include>
+			<div id="profile_box">
+				<img id="profile_img" src="${pageContext.request.contextPath}/resources/image/profile.png" alt="profile">
+				<div id="profile_menu">
+					<a href="${pageContext.request.contextPath}/member/mypage">회원정보 수정</a>
+					<a href="${pageContext.request.contextPath}/js/add.js">알림</a>
+					<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
+					<div class="line"></div>
+					<div><button class="plus"></button></div>
+					<p>팔로워</p><p>팔로잉</p>
+				</div>
+			</div>
 		</div>
-	</div>
 	
 	<div>
 		<div><h1>내가 작성한 레시피</h1></div>
