@@ -43,7 +43,6 @@ public class MemberController {
 		
 		if(cookItem == null) {
 			return  "redirect:/cook/list";
-			
 		}
 		model.addAttribute("item", cookItem);
 		return "/cook/detail";
@@ -83,5 +82,12 @@ public class MemberController {
 		return "redirect:/cook/list";
 	}
 
+	@GetMapping("/logout")
+	String logout(HttpSession session) {
+		session.invalidate();
+		
+		return "redirect:/";
+	}
+	
 	
 }

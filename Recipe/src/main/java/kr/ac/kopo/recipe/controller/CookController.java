@@ -1,6 +1,9 @@
 package kr.ac.kopo.recipe.controller;
 
+import java.io.File;
 import java.util.List;
+import java.util.UUID;
+
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +13,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.ac.kopo.recipe.model.Cook;
 import kr.ac.kopo.recipe.model.Member;
@@ -20,6 +25,8 @@ import kr.ac.kopo.recipe.service.MemberService;
 @Controller
 @RequestMapping("/cook")
 public class CookController {
+	final String uploadPath = "d:/upload";
+	
 	@Autowired
 	private CookService cookService;
 	
@@ -32,8 +39,25 @@ public class CookController {
 	}
 	
 	@PostMapping("/add")
-	public String addSubmit(@ModelAttribute Cook cook, HttpSession session) {
+	public String addSubmit(@ModelAttribute Cook cook, Step step, HttpSession session, @RequestParam("file") MultipartFile[] imgFile) {
 	    String userid = (String) session.getAttribute("userid");
+	    
+	    for (MultipartFile file : files) {
+	    	if(!file.isEmpty()) {
+		    	String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
+		    	File img = new File(uploadPath, fileName);
+		    	
+		    	try {
+					file.transferTo(img);
+					session.setAttribute("fileName", fileName);
+					step.setImagepath("/upload/" + fileName);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+		    }
+	    }
+	    
+	    
 	    cookService.addCookWithStep(cook, userid);
 	    return "redirect:/cook/list";
 	}
@@ -103,5 +127,11 @@ public class CookController {
 		return "redirect:/cook/list";
 	}
 	
+	@GetMapping("/logout")
+	String logout(HttpSession session) {
+		session.invalidate();
+		
+		return "redirect:/";
+	}
 	
 }

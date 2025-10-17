@@ -1,83 +1,82 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
-<jsp:include page="../include/head.jsp" />
 <title>요리상세페이지</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-	<div>
-		<div>
+	<div class="container my-5">
+	<jsp:include page="../include/head.jsp" />
+		<div class="container my-5 justify-content-center">
 			<div>
-				<label>레시피 제목</label>
-				<p>${item.recipetitle}</p>
+				<div class="mb-3">
+					<label class="mb-2"><strong>레시피 제목</strong></label> 
+					<div><p>${item.recipetitle}</p></div>
+				</div>
+
+				<div class="mb-3">
+					<label class="mb-2"><strong>레시피 소개</strong></label>
+					<div><p>${item.comment}</p></div> 
+				</div>
+
+				<div class="mb-3">
+					<label for="cook-url" class="mb-2"><strong>레시피 동영상 링크</strong></label>
+					<div><p>${item.link}</p></div>
+				</div>
+					<%--<input type="url" id="cook-url" name="link" placeholder="https://example.com" value="${item.link}"/> --%>
 			</div>
+	
+				<fieldset id="steps" class="mb-4">
+				    <legend class="fw-bold">요리순서</legend>
+				
+				    <div id="step_box" class="step border p-3 mb-3">
+				        <c:forEach var="step" items="${item.steps}" varStatus="status">
+				            <div class="step border p-3 mb-3">
+				                <h5>STEP ${status.index + 1}</h5>
+				
+				                <!-- 조리내용 -->
+				                <div class="mb-2">
+				                    <label><strong>내용</strong></label>
+				                    <input type="text" value="${step.content}" class="form-control" readonly />
+				                </div>
+				
+				                <!-- 이미지 첨부 영역 (파일 없음 표시도 고려) -->
+				                <%-- <div class="mb-2">
+				                    <label><strong>이미지</strong></label>
+				                    <ul id="file">
+				                        <c:forEach var="img" items="${step.images}">
+				                            <li><img src="${img.url}" alt="요리 이미지" width="100" /></li>
+				                        </c:forEach>
+				                    </ul>
+				                </div> --%>
+				
+				                <!-- 재료 -->
+				                <div class="mb-2">
+				                    <label><strong>재료</strong></label>
+				                    <input type="text" value="${step.ingredient}" class="form-control" readonly />
+				                </div>
+				
+				                <!-- 도구 -->
+				                <div class="mb-2">
+				                    <label><strong>도구</strong></label>
+				                    <input type="text" value="${step.tools}" class="form-control" readonly />
+				                </div>
+				
+				                <!-- 팁 -->
+				                <div class="mb-2">
+				                    <label><strong>팁</strong></label>
+				                    <input type="text" value="${step.tip}" class="form-control" readonly />
+				                </div>
+				            </div>
+				        </c:forEach>
+				    </div>
+				</fieldset>
 
-			<div>
-				<label>레시피 코멘트</label>
-				<p>${item.comment}</p>
-				<%--<input type="text" name="comment" value="${item.comment}"/> --%>
 			</div>
-
-			<div>
-				<label>레시피 링크</label>
-				<p>${item.link}</p>
-				<%--<input type="url" id="cook-url" name="link" placeholder="https://example.com" value="${item.link}"/> --%>
-			</div>
-
-			<fieldset id="steps">
-				<legend>요리순서</legend>
-
-				<c:forEach var="stepitem" items="${steps}" varStatus="status">
-					<div class="step">
-						<h2>STEP ${status.index + 1}</h2>
-						<input type="text" name="steps[${status.index}].content"
-							value="${stepitem.content}" placeholder="조리내용을 적어보세요!" />
-
-						<div>
-							<label>재료</label> <input type="text"
-								name="steps[${status.index}].ingredient"
-								value="${stepitem.ingredient}" placeholder="재료" /> <label>도구</label>
-							<input type="text" name="steps[${status.index}].tools"
-								value="${stepitem.tools}" placeholder="도구" /> <label>팁</label> <input
-								type="text" name="steps[${status.index}].tip"
-								value="${stepitem.tip}" placeholder="팁" />
-						</div>
-					</div>
-				</c:forEach>
-			</fieldset>
-
-
 		</div>
-
-		<!-- 요리 목록 테이블 만들기 -->
-		<!-- 		<table class="table table-sm" border="1"> -->
-		<!-- 			<thead> -->
-		<!-- 				<tr> -->
-		<!-- 					<th>요리명</th> -->
-		<!-- 					<th>코멘트</th> -->
-		<!-- 					<th>재료</th> -->
-		<!-- 					<th>요리내용</th> -->
-		<!-- 				</tr> -->
-		<!-- 			</thead> -->
-		<!-- 			<tbody> -->
-		<%-- 				<c:forEach var="cook" items="${list}"> --%>
-		<!-- 					<ul> -->
-		<%-- 						<li>${cook.recipeid}</li> --%>
-		<%-- 						<li>${cook.recipetitle}</li> --%>
-		<%-- 						<li>${cook.comment}</li> --%>
-		<%-- 						<li>${cook.link}</li> --%>
-		<!-- 					</ul> -->
-		<%-- 				</c:forEach> --%>
-		<%-- 				<c:if test="${empty list}"> --%>
-		<!-- 					<tr> -->
-		<!-- 						<td colspan="4">요리 정보가 없습니다.</td> -->
-		<!-- 					</tr> -->
-		<%-- 				</c:if> --%>
-		<!-- 			</tbody> -->
-		<!-- 		</table> -->
 	</div>
+<jsp:include page="../include/footer.jsp" />
 </body>
 </html>

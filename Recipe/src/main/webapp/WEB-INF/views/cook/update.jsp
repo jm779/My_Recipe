@@ -1,106 +1,90 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
-<jsp:include page="../include/head.jsp" />
-<title>요리상세페이지</title>
+<title>요리수정페이지</title>
+<script src="${pageContext.request.contextPath}/resources/js/img_add.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/upload.js"></script>
 </head>
 <body>
-	<div>
+	<div class="container my-5">
+	<jsp:include page="../include/head.jsp" />
 		<div>
 			<form method="post" action="${pageContext.request.contextPath}/cook/update/${item.recipeid}">
-				<div>
-					<label>레시피 제목</label> <input type="text" name="recipetitle"
-						value="${item.recipetitle}" />
+				<div class="mb-3">
+					<label class="mb-2" ><strong>레시피 제목</strong></label> 
+					<input type="text" name="recipetitle" class="form-control" value="${item.recipetitle}"/>
+				</div>
+
+				<div class="mb-3">
+					<label class="mb-2"><strong>레시피 소개</strong></label>
+					<input type="text" name="comment" class="form-control" value="${item.comment}"/>
+				</div>
+
+				<div class="mb-3">
+					<label for="cook-url" class="mb-2"><strong>레시피 동영상 링크</strong></label>
+					<input type="url" id="cook-url" name="link" placeholder="https://example.com"
+						class="form-control" value="${item.link}" />
 				</div>
 
 				<div>
-					<label>레시피 소개</label> <input type="text" name="comment"
-						value="${item.comment}" />
-				</div>
-
-				<div>
-					<label for="cook-url">레시피 동영상 링크</label> <input type="url"
-						id="cook-url" name="link" placeholder="https://example.com"
-						value="${item.link}" />
-				</div>
-				
-				<div>
-					<div>
-						<img src="" alt="">
-						<div>
-							<button type="button">추가버튼</button>
-						</div>
-					</div>
-					<div>
-						<img src="" alt="">
-						<div>
-							<button type="button">추가버튼</button>
-						</div>
-					</div>
-				</div>
-
-				<div>
-					<h2>요리순서</h2>
-					<section class="steps">
-						<c:forEach var="stepitem" items="${steps}" varStatus="status">
-							<div class="step">
-								<p>STEP ${status.index + 1}</p>
-								<button class="minus" type="button">
-									<a class="line"></a>
-								</button>
-								<input type="text" name="steps[${status.index}].content" value="${stepitem.content}" 
-									placeholder="조리내용을 적어보세요!" /> 
-								<img src="" alt="이미지 추가" />
+					<fieldset id="steps" class="mb-4">
+						<legend class="fw-bold" style="font-weight: bold;">요리순서</legend>
+									
+						<div class="step border p-3 mb-3">			
+							<c:forEach var="stepitem" items="${steps}" varStatus="status">
 								<div>
-									<input type="text" name="steps[${status.index}].ingredient"
-										value="${stepitem.ingredient}" placeholder="재료" /> 
-									<input type="text" name="steps[${status.index}].tools"
-										value="${stepitem.tools}" placeholder="도구" /> 
-									<input type="text" name="steps[${status.index}].tip" 
-										value="${stepitem.tip}" placeholder="팁" />
+									<h5>STEP ${status.index + 1}</h5>
+										
+	          						<button type="button" class="btn btn-danger btn-sm mb-2" onclick="removeBtn(this)">-</button>
+									
+									<input type="text" name="steps[${status.index}].content" value="${stepitem.content}" 
+										placeholder="조리내용을 적어보세요!" class="form-control mb-2"/> 
+									
+									<div>
+										<ul id="file"></ul>
+										<button type="button" id="photo_btn">이미지 추가</button>
+									</div>
+									
+									<div class="mb-2" id="ingre_input">
+										<label><strong>재료</strong>
+											<input type="text" name="steps[${status.index}].ingredient" placeholder="재료"
+												value="${stepitem.ingredient}" class="form-control mb-2" /> 
+										</label>
+										 <button id="add_ingre" type="button" class="btn btn-outline-primary">+</button>
+		            					 <button id="delete_ingre" type="button" class="btn btn-outline-primary">-</button>
+									</div>
+									<div class="mb-2" id="tools_input">	
+										<label><strong>도구</strong>
+											<input type="text" name="steps[${status.index}].tools" placeholder="도구"
+												value="${stepitem.tools}" class="form-control mb-2" />
+										</label>
+										<button id="add_tools" type="button" class="btn btn-outline-primary">+</button>
+		            					<button id="delete_tools" type="button" class="btn btn-outline-primary">-</button>
+									</div>
+									<div class="mb-2" id="tip_input">		
+										<label><strong>팁</strong>	 
+											<input type="text" name="steps[${status.index}].tip" placeholder="팁"
+												value="${stepitem.tip}" class="form-control mb-2" />
+										</label>
+										<button id="add_tip" type="button" class="btn btn-outline-primary">+</button>
+		            					<button id="delete_tip" type="button" class="btn btn-outline-primary">-</button>
+									</div>
 								</div>
-							</div>
-						</c:forEach>
-					</section>
+							</c:forEach>
+						</div>
+					</fieldset>
 				</div>
-		<div>
-			<button type="button" id="add_step_btn">step 추가하기</button>
+				<div>
+					<button type="button" id="add_step_btn" class="btn btn-secondary">step 추가</button>
+				</div>
+				<div>
+					<button id="send" type="submit" class="justify-content-center">수정완료</button>
+				</div>
+			</form>
 		</div>
-		<div>
-			<button id="send" type="submit">수정완료</button>
-		</div>
-		</form>
 	</div>
-
-	<!-- 요리 목록 테이블 만들기 -->
-	<!-- 		<table class="table table-sm" border="1"> -->
-	<!-- 			<thead> -->
-	<!-- 				<tr> -->
-	<!-- 					<th>요리명</th> -->
-	<!-- 					<th>코멘트</th> -->
-	<!-- 					<th>재료</th> -->
-	<!-- 					<th>요리내용</th> -->
-	<!-- 				</tr> -->
-	<!-- 			</thead> -->
-	<!-- 			<tbody> -->
-	<%-- 				<c:forEach var="cook" items="${list}"> --%>
-	<!-- 					<ul> -->
-	<%-- 						<li>${cook.recipeid}</li> --%>
-	<%-- 						<li>${cook.recipetitle}</li> --%>
-	<%-- 						<li>${cook.comment}</li> --%>
-	<%-- 						<li>${cook.link}</li> --%>
-	<!-- 					</ul> -->
-	<%-- 				</c:forEach> --%>
-	<%-- 				<c:if test="${empty list}"> --%>
-	<!-- 					<tr> -->
-	<!-- 						<td colspan="4">요리 정보가 없습니다.</td> -->
-	<!-- 					</tr> -->
-	<%-- 				</c:if> --%>
-	<!-- 			</tbody> -->
-	<!-- 		</table> -->
-	</div>
+<jsp:include page="../include/footer.jsp" />
 </body>
 </html>

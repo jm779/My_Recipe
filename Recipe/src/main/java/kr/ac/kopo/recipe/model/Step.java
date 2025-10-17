@@ -9,7 +9,14 @@ public class Step {
 	private String ingredient;
 	private String tools;
 	private String tip;
+	private String imagepath;
 	
+	public String getImagepath() {
+		return imagepath;
+	}
+	public void setImagepath(String imagepath) {
+		this.imagepath = imagepath;
+	}
 	public int getStepid() {
 		return stepid;
 	}

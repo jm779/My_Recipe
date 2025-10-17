@@ -1,19 +1,37 @@
 @charset "UTF-8";
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
 header{
 	display: flex;
 }
+.nav-item{
+	font-size: 22px;
+	font-weight: bold;
+}
 .photo-box{
 	display: flex;
-	gap: 10px;
+	gap: 20px;
 	flex-wrap: wrap;
 	align-content: center;
-	justify-content: start;
+	justify-content: space-around;
 	margin-top: 10px;
 }
+.photo-box div{
+	text-align: center;
+}
 .photo-box img{
-	width: 100px;
-	height: 100px;
+	width: 250px;
+	height: 250px;
 	object-fit: cover;
 	border-radius: 8px;
 	display: block;
+	margin: 0 auto 10px auto;
+}
+footer{
+	background-color: gray;
+	width: 1240px;
+	height: 165px;
 }

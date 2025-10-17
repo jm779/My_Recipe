@@ -11,7 +11,7 @@
 	<!-- Header -->
     <header class="d-flex justify-content-between align-items-center py-3 border-bottom">
       <div class="d-flex align-items-center gap-3">
-        <a href="#">
+        <a href="/">
           <img src="${pageContext.request.contextPath}/resources/image/logo.png" alt="logo" style="height:50px;">
         </a>
         <h2 class="mb-0">RecipeTime</h2>
@@ -37,7 +37,7 @@
             <div>${sessionScope.member.name}(${sessionScope.member.userid})님 환영합니다.</div>
             <div>
               <a href="logout">로그아웃</a> |
-              <a href="goadd">레시피 등록</a> |
+              <a href="${pageContext.request.contextPath}/cook/add">레시피 등록</a> |
               <a href="${pageContext.request.contextPath}/member/mypage">마이페이지</a>
             </div>
           </div>

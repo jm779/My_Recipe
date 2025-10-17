@@ -16,7 +16,7 @@
         <a href="#">
           <img src="${pageContext.request.contextPath}/resources/image/logo.png" alt="logo" style="height:50px;">
         </a>
-        <h2 class="mb-0">RecipeTime</h2>
+        <h2 class="mb-0"><a href="/" style="text-decoration: none">RecipeTime</a></h2>
       </div>
 
       <!-- Search -->
@@ -48,7 +48,7 @@
     </header>
 
     <nav class="my-3">
-      <ul class="nav nav-pills justify-content-around gap-3">
+      <ul class="nav nav-pills justify-content-between gap-3">
         <li class="nav-item"><a class="nav-link" href="#">추천 Recipe</a></li>
         <li class="nav-item"><a class="nav-link" href="#">인기 Recipe</a></li>
         <li class="nav-item"><a class="nav-link" href="#">Best Chef</a></li>
@@ -57,67 +57,60 @@
     </nav>
 
     <!-- Hot Recipe -->
-    <section class="mb-5">
-      <div class="d-flex justify-content-between align-items-center mb-2" style="width: 100%;">
-        <h4>Hot Recipe</h4>
-        <a href="#">더보기</a>
-        <div class="photo-box d-flex">
-        	<div>
-        		<img src="${pageContext.request.contextPath}/resources/image/kimchi_soup.jpg" alt="김치찌개" style="width:100px;">
-        		<a><p></p></a>
-        	</div>
-        	<div>
-        		<img src="${pageContext.request.contextPath}/resources/image/bean_noodles.jpg" alt="콩국수" style="width:100px;">
-        		<a><p></p></a>
-        	</div>
-        	<div>
-        		<img src="${pageContext.request.contextPath}/resources/image/Dak-galbi.jpg" alt="닭갈비" style="width:100px;">
-        		<a><p></p></a>
-        	</div>
-        	<div>
-        		<img src="${pageContext.request.contextPath}/resources/image/tteokbokki.jpg" alt="떡볶이" style="width:100px;">
-        		<a><p></p></a>
-        	</div>
-        </div>
-      </div>
-      <div class="row row-cols-1 row-cols-md-3 g-4">
-        <c:forEach var="item" items="${hotList}">
-          <div class="col">
-            <div class="card h-100">
-              <div class="card-img-top" style="height:200px; background-size:cover; background-image:url('${pageContext.request.contextPath}/resources/image/${item.image}');"></div>
-              <div class="card-body">
-                <p class="card-text">${item.title}</p>
-              </div>
-            </div>
-          </div>
-        </c:forEach>
-      </div>
-    </section>
+	<section class="mb-5 text-center">
+	  <div class="d-flex justify-content-between align-items-center mb-2" style="width: 100%;">
+	    <h4>Hot Recipe</h4>
+	    <a href="#">더보기</a>
+	  </div>
+	
+	  <div class="photo-box d-flex">
+	    <div>
+	      <img src="${pageContext.request.contextPath}/resources/image/kimchi_soup.jpg" alt="김치찌개">
+	      <p>김치찌개</p>
+	    </div>
+	    <div>
+	      <img src="${pageContext.request.contextPath}/resources/image/bean_noodles.jpg" alt="콩국수">
+	      <p>콩국수</p>
+	    </div>
+	    <div>
+	      <img src="${pageContext.request.contextPath}/resources/image/Dak-galbi.jpg" alt="닭갈비">
+	      <p>닭갈비</p>
+	    </div>
+	    <div>
+	      <img src="${pageContext.request.contextPath}/resources/image/tteokbokki.jpg" alt="떡볶이">
+	      <p>떡볶이</p>
+	    </div>
+	  </div>
+	</section>
 
+	<!-- Best recipe -->
+	<section class="mb-5 text-center">
+	  <div class="d-flex justify-content-between align-items-center mb-2" style="width: 100%;">
+	    <h4>Best Recipe</h4>
+	    <a href="#">더보기</a>
+	  </div>
+	
+	  <div class="photo-box d-flex">
+	    <div>
+	      <img src="${pageContext.request.contextPath}/resources/image/mushroom_rice.jpg" alt="버섯볶음밥">
+	      <p>버섯볶음밥</p>
+	    </div>
+	    <div>
+	      <img src="${pageContext.request.contextPath}/resources/image/dakbal.jpg" alt="닭발">
+	      <p>닭발</p>
+	    </div>
+	    <div>
+	      <img src="${pageContext.request.contextPath}/resources/image/cold_noodles.jpg" alt="냉면">
+	      <p>냉면</p>
+	    </div>
+	    <div>
+	      <img src="${pageContext.request.contextPath}/resources/image/toast.jpg" alt="토스트">
+	      <p>토스트</p>
+	    </div>
+	  </div>
+	</section>
 
 	<section class="mb-5">
-      <div class="d-flex justify-content-between align-items-center mb-2" style="width: 100%;">
-        <h4>Best Recipe</h4>
-        <a href="#">더보기</a>
-        <div class="photo-box d-flex">
-        	<div>
-        		<img src="${pageContext.request.contextPath}/resources/image/mushroom_rice.jpg" alt="버섯볶음밥" style="width: 100px" >
-        		<a><p></p></a>
-        	</div>
-        	<div>
-        		<img src="${pageContext.request.contextPath}/resources/image/dakbal.jpg" alt="닭발" style="width: 100px" >
-        		<a><p></p></a>
-        	</div>
-        	<div>
-        		<img src="${pageContext.request.contextPath}/resources/image/cold_noodles.jpg" alt="냉면" style="width: 100px" >
-        		<a><p></p></a>
-        	</div>
-        	<div>
-        		<img src="${pageContext.request.contextPath}/resources/image/toast.jpg" alt="토스트" style="width: 100px" >
-        		<a><p></p></a>
-        	</div>
-        </div>
-      </div>
       <div class="row row-cols-1 row-cols-md-3 g-4">
         <c:forEach var="item" items="${hotList}">
           <div class="col">
@@ -132,20 +125,32 @@
       </div>
     </section>
 
-
-    <!-- Best Chef -->
-    <section class="mb-5">
-      <div class="d-flex justify-content-between align-items-center mb-2">
-        <h4>Best Chef</h4>
-        <a href="#">더보기</a>
-        <div class="photo-box">
-        	<div><img src="${pageContext.request.contextPath}/resources/image/" alt="" ></div>
-        	<div><img src="${pageContext.request.contextPath}/resources/image/" alt="" ></div>
-        	<div><img src="${pageContext.request.contextPath}/resources/image/" alt="" ></div>
-        	<div><img src="${pageContext.request.contextPath}/resources/image/" alt="" ></div>
-        </div>
-      </div>
-      <div class="row row-cols-1 row-cols-md-3 g-4">
+	<!-- Best Chef -->
+	<section class="mb-5 text-center">
+	  <div class="d-flex justify-content-between align-items-center mb-2" style="width: 100%;">
+	    <h4>Best Chef</h4>
+	    <a href="#">더보기</a>
+	  </div>
+	
+	  <div class="photo-box d-flex">
+	    <div>
+	      <a><img src="${pageContext.request.contextPath}/resources/image/user1.png" alt="user1"></a>
+	      <p>user1</p>
+	    </div>
+	    <div>
+	      <img src="${pageContext.request.contextPath}/resources/image/user2.png" alt="user2">
+	      <p>user2</p>
+	    </div>
+	    <div>
+	      <img src="${pageContext.request.contextPath}/resources/image/user3.png" alt="user3">
+	      <p>user3</p>
+	    </div>
+	    <div>
+	      <img src="${pageContext.request.contextPath}/resources/image/user4.png" alt="user4">
+	      <p>user4</p>
+	    </div>
+	  </div>
+	  <div class="row row-cols-1 row-cols-md-3 g-4">
         <c:forEach var="chef" items="${chefList}">
           <div class="col">
             <div class="card h-100">
@@ -157,7 +162,8 @@
           </div>
         </c:forEach>
       </div>
-    </section>
+	</section>
+
 
     <!-- 공지 -->
     <section class="mb-5">
