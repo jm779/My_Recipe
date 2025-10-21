@@ -16,10 +16,10 @@ public class StepDaoImpl implements StepDao {
 	public void add(Step step) {
 		sql.insert("step.add", step);
 	}
-
+	
 	@Override
-	public List<Step> listByRecipeId(int recipeid) {
-		return sql.selectList("step.stepitem", recipeid);
+	public void deleteByRecipeId(int recipeid) {
+		sql.delete("step.deleteByRecipeId", recipeid);
 	}
 	
 	@Override
@@ -29,13 +29,12 @@ public class StepDaoImpl implements StepDao {
 	}
 
 	@Override
-	public void deleteByRecipeId(int recipeid) {
-		sql.delete("step.deleteByRecipeId", recipeid);
+	public List<Step> listByRecipeId(int recipeid) {
+		return sql.selectList("step.listByRecipeId", recipeid);
+				
 	}
 
-	@Override
-	public List<Step> listByRecipeid(int recipeid) {
-		return sql.selectList("step.stepitem", recipeid);
-	}
+	
 
+	
 }

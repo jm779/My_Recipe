@@ -79,7 +79,7 @@ public class MemberController {
 	@GetMapping("/delete/{recipeid}")
 	public String delete(@PathVariable int recipeid) {
 		memberService.delete(recipeid);
-		return "redirect:/cook/list";
+		return "member/mypage";
 	}
 
 	@GetMapping("/logout")

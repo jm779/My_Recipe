@@ -25,6 +25,12 @@ public class CookServiceImpl implements CookService {
 	@Override
 	@Transactional
 	public void addCookWithStep(Cook cook, String userid) {
+		System.out.println("Cook: " + cook);
+	    for(Step s : cook.getSteps()) {
+	        System.out.println("Step: " + s.getContent() + ", " + s.getIngredient());
+	    }
+		
+	    
 		cook.setUserid(userid);
 		cookDao.addCook(cook);
 		
@@ -40,16 +46,6 @@ public class CookServiceImpl implements CookService {
 		}
 	}
 
-//	@Override
-//	public void addCook(Cook cook) {
-//		cookDao.addCook(cook);
-//	}
-//
-//	@Override
-//	public void addStep(Step step) {
-//		cookDao.addStep(step);
-//	}
-	
 	@Override
 	public List<Cook> list() {
 		return cookDao.list();
@@ -86,6 +82,7 @@ public class CookServiceImpl implements CookService {
 	@Override
 	public Cook detail(int recipeid) {
 		Cook cook = cookDao.detail(recipeid);
+		
 		if(cook != null) {
 			List<Step> steps = stepDao.listByRecipeId(recipeid);
 			cook.setSteps(steps);
@@ -95,8 +92,8 @@ public class CookServiceImpl implements CookService {
 	}
 
 	@Override
-	public List<Step> getStepsByRecipeid(int recipeid) {
-		return stepDao.listByRecipeid(recipeid);
+	public List<Step> listByRecipeId(int recipeid) {
+		return stepDao.listByRecipeId(recipeid);
 	}
 
 }

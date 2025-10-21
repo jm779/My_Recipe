@@ -8,10 +8,10 @@ window.addEventListener("load", () => {
         const input = document.createElement("input");
         input.setAttribute("type", "file");
         input.setAttribute("name", "file");
-        input.setAttribute("accept", "image/**");
+        input.setAttribute("accept", "image/*");
 
         input.addEventListener("change", () => {
-            const file = input.file[0];
+            const file = input.files[0];
             if(file){
                 const reader = new FileReader();
                 reader.onload = function(e){

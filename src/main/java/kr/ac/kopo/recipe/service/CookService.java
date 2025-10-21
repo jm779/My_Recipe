@@ -19,9 +19,6 @@ public interface CookService{
 
 	Cook detail(int recipeid);
 
-	List<Step> getStepsByRecipeid(int recipeid);
+	List<Step> listByRecipeId(int recipeid);
 	
-//	void addCook(Cook cook);
-//	
-//	void addStep(Step step);
 }
