@@ -11,7 +11,6 @@
 		<result property="userid" column="userid" />
 	</resultMap>
 
-
 	<select id="list" resultType="Cook">
 		SELECT *
 		FROM cook

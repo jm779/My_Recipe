@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import kr.ac.kopo.recipe.model.Cook;
 import kr.ac.kopo.recipe.model.Member;
 import kr.ac.kopo.recipe.model.Step;
+import kr.ac.kopo.recipe.pager.Pager;
 
 @Repository
 public class MemberDaoImpl implements MemberDao {
@@ -39,8 +40,8 @@ public class MemberDaoImpl implements MemberDao {
 	}
 	
 	@Override
-	public List<Cook> list() {
-		return sql.selectList("cook.list");
+	public List<Cook> list(Pager pager) {
+		return sql.selectList("cook.list", pager);
 	}
 
 	@Override
@@ -63,4 +64,9 @@ public class MemberDaoImpl implements MemberDao {
 		return sql.selectOne("cook.getStepByRecipeid", recipeid);
 	}
 
+	@Override
+	public int total(Pager pager) {
+		return sql.selectOne("member.total", pager);
+	}
+	
 }

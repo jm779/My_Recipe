@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import kr.ac.kopo.recipe.model.Cook;
 import kr.ac.kopo.recipe.model.Member;
 import kr.ac.kopo.recipe.model.Step;
+import kr.ac.kopo.recipe.pager.Pager;
+import kr.ac.kopo.recipe.service.CookService;
 import kr.ac.kopo.recipe.service.MemberService;
 
 @Controller
@@ -23,19 +25,24 @@ import kr.ac.kopo.recipe.service.MemberService;
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private CookService cookService;
 
 	@GetMapping("/list")
 	public String list(@SessionAttribute Member member) {
 		return "member/list";
 	}
-	      
+	     
+	
 	@GetMapping("/mypage")
-	public String mypage(Model model) {
-		List<Cook> list = memberService.list();
+	public String mypage(@SessionAttribute Member member, Pager pager, Model model) {
+		List<Cook> list = memberService.list(pager);
 		model.addAttribute("list", list);
-		
-		return "member/mypage";
+
+	    return "member/mypage";
 	}
+
 	
 	@GetMapping("/detail/{recipeid}")
 	public String detail(@PathVariable int recipeid, Model model) {
@@ -78,8 +85,8 @@ public class MemberController {
 	
 	@GetMapping("/delete/{recipeid}")
 	public String delete(@PathVariable int recipeid) {
-		memberService.delete(recipeid);
-		return "member/mypage";
+		cookService.delete(recipeid);
+		return "redirect:/member/mypage";
 	}
 
 	@GetMapping("/logout")

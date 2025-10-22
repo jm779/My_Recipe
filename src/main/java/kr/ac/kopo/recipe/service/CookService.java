@@ -4,6 +4,7 @@ import java.util.List;
 
 import kr.ac.kopo.recipe.model.Cook;
 import kr.ac.kopo.recipe.model.Step;
+import kr.ac.kopo.recipe.pager.Pager;
 
 public interface CookService{
 	

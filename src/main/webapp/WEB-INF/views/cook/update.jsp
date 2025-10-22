@@ -20,7 +20,7 @@
         <h3 style="margin-left: 12px; margin-top: 10px;">레시피 수정</h3>
     </div>
 
-    <form method="post" action="${pageContext.request.contextPath}/cook/update/${cook.recipeid}" enctype="multipart/form-data"> 
+    <form method="post" action="${pageContext.request.contextPath}/cook/update/${item.recipeid}" enctype="multipart/form-data"> 
       <div class="mb-3">
         <label class="form-label"><strong>레시피 제목</strong></label>
         <input type="text" name="recipetitle" class="form-control" value="${item.recipetitle}" />
@@ -52,7 +52,7 @@
             <div>
               <ul id="file"></ul>
               <input type="file" name="file" id="fileInput${status.index}" multiple style="display: none;" />
-              <button type="button" id="photo_btn${status.index}">이미지 추가</button>
+              <button type="button" id="photo_btn">이미지 추가</button>
             </div>
 
             <div class="mb-2">
