@@ -2,14 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="member">
-	<select id="list" resultType="member">
-		SELECT * FROM member2
-	</select>
+
+	<sql id="searchCondition">
+		
+		<where>
+			<if test="searchCondition == 1">
+				recipeid=#{keyword}
+			</if>
+			<if test="searchCondition == 2">
+				recipetitle LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+			</if>	
+			<if test="searchCondition == 3">
+				comment LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+			</if>
+		</where>
+	</sql>
 	
-   	<insert id="add">
+	<select id="total" resultType="Integer">
+		SELECT COUNT(*) FROM member
+		<include refid="searchCondition"></include>
+	</select>
+
+	<insert id="add">
 		INSERT INTO member2
 		VALUES (#{userid}, #{userpassword}, #{name}, #{email})
 	</insert>
+
+	<select id="list" resultType="member">
+		SELECT * FROM member2
+	</select>
 	
 	<update id="update">
 		UPDATE member2
@@ -26,4 +47,5 @@
 		SELECT * FROM member2
 		WHERE userid=#{userid}
 	</select>
+	
 </mapper>

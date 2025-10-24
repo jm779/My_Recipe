@@ -5,10 +5,11 @@ import java.util.List;
 import kr.ac.kopo.recipe.model.Cook;
 import kr.ac.kopo.recipe.model.Member;
 import kr.ac.kopo.recipe.model.Step;
+import kr.ac.kopo.recipe.pager.Pager;
 
 public interface MemberService{
 	
-	List<Cook> list();
+	List<Cook> list(Pager pager);
 	
 	void add(Member item);
 
@@ -27,5 +28,6 @@ public interface MemberService{
 	Cook item(int recipeid);
 
 	Member item(String userid);
+
 
 }

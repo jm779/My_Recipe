@@ -3,14 +3,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<jsp:include page="../include/head.jsp" />
-<script src="${pageContext.request.contextPath}/js/delete.js"></script>
 <title>요리상세페이지</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-	<div class="container my-5">
-		<div><h3>내가 작성한 레시피</h3></div>
+	<div class="container my-2">
+	<jsp:include page="../include/head.jsp" />
+		<div class="mt-4 mb-3"><h3>내가 작성한 레시피</h3></div>
 		
 		 <!-- 요리 목록 테이블 만들기 -->
 		<table class="table table-sm" border="1">
@@ -56,5 +55,6 @@
 			</tbody>
 		</table> 
 	</div>
+<jsp:include page="../include/footer.jsp" />
 </body>
 </html>

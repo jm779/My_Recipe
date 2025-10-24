@@ -3,6 +3,14 @@
 
 <mapper namespace="cook">
 
+	<resultMap id="CookResultMap" type="kr.ac.kopo.recipe.model.Cook">
+		<id property="recipeid" column="recipeid" />
+		<result property="recipetitle" column="recipetitle" />
+		<result property="comment" column="comment" />
+		<result property="link" column="link" />
+		<result property="userid" column="userid" />
+	</resultMap>
+
 	<select id="list" resultType="Cook">
 		SELECT *
 		FROM cook
@@ -16,9 +24,9 @@
 		VALUES (#{recipeid}, #{recipetitle}, #{comment}, #{link}, #{userid})
 	</insert>
 
-	<insert id="addStep" parameterType="Step">
-		INSERT INTO step(recipeid, step_order, content, ingredient, tools, tip)
-		VALUES (#{recipeid}, #{stepOrder}, #{content}, #{ingredient}, #{tools}, #{tip})
+	<insert id="addStep" parameterType="step">
+		INSERT INTO step(recipeid, step_order, content, ingredient, tools, tip, imagepath)
+		VALUES (#{recipeid}, #{stepOrder}, #{content}, #{ingredient}, #{tools}, #{tip}, #{imagepath})
 	</insert>
 
 	<select id="item" resultType="Cook">
@@ -46,7 +54,8 @@
 		SET content= #{content},
 		ingredient = #{ingredient},
 		tools = #{tools},
-		tip = #{tip}
+		tip = #{tip},
+		imagepath = #{imagepath}
 		WHERE recipeid = #{recipeid}
 	</update>
 	

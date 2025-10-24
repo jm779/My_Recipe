@@ -3,9 +3,20 @@
 
 <mapper namespace="step">
 
-	<insert id="add" parameterType="step">
-		INSERT INTO step(recipeid, step_order, content, ingredient, tools, tip)
-		VALUES (#{recipeid}, #{stepOrder}, #{content}, #{ingredient}, #{tools}, #{tip})
+	<resultMap id="StepResultMap" type="kr.ac.kopo.recipe.model.Step">
+		<id property="stepid" column="stepid" />
+		<result property="recipeid" column="recipeid" />
+		<result property="stepOrder" column="stepOrder" />
+		<result property="content" column="content" />
+		<result property="ingredient" column="ingredient" />
+		<result property="tools" column="tools" />
+		<result property="tip" column="tip" />
+		<result property="imagepath" column="imagepath" />
+	</resultMap>
+
+	<insert id="add" parameterType="Step">
+		INSERT INTO step(recipeid, step_order, content, ingredient, tools, tip, imagepath)
+		VALUES (#{recipeid}, #{stepOrder}, #{content}, #{ingredient}, #{tools}, #{tip}, #{imagepath})
 	</insert>
 
 	<select id="stepitem" parameterType="int" resultType="Step">
@@ -28,6 +39,12 @@
 		DELETE FROM step 
 		WHERE recipeid = #{recipeid}
 	</delete>
+	
+	<select id="listByRecipeId" parameterType="int" resultType="kr.ac.kopo.recipe.model.Step" >
+		SELECT * FROM step
+		WHERE recipeid = #{recipeid}
+		ORDER BY step_order
+	</select>
 
 
 </mapper>

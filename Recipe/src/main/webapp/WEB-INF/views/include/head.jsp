@@ -36,7 +36,7 @@
             <img src="${pageContext.request.contextPath}/resources/image/profile.png" alt="profile" style="height:40px;">
             <div>${sessionScope.member.name}(${sessionScope.member.userid})님 환영합니다.</div>
             <div>
-              <a href="logout">로그아웃</a> |
+              <a href="/logout">로그아웃</a> |
               <a href="${pageContext.request.contextPath}/cook/add">레시피 등록</a> |
               <a href="${pageContext.request.contextPath}/member/mypage">마이페이지</a>
             </div>

@@ -4,6 +4,7 @@ import java.util.List;
 
 import kr.ac.kopo.recipe.model.Cook;
 import kr.ac.kopo.recipe.model.Step;
+import kr.ac.kopo.recipe.pager.Pager;
 
 public interface CookService{
 	
@@ -19,9 +20,6 @@ public interface CookService{
 
 	Cook detail(int recipeid);
 
-	List<Step> getStepsByRecipeid(int recipeid);
+	List<Step> listByRecipeId(int recipeid);
 	
-//	void addCook(Cook cook);
-//	
-//	void addStep(Step step);
 }

@@ -10,6 +10,7 @@ import kr.ac.kopo.recipe.dao.MemberDao;
 import kr.ac.kopo.recipe.model.Cook;
 import kr.ac.kopo.recipe.model.Member;
 import kr.ac.kopo.recipe.model.Step;
+import kr.ac.kopo.recipe.pager.Pager;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -33,8 +34,12 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<Cook> list() {
-		return memberDao.list();
+	public List<Cook> list(Pager pager) {
+		int total = memberDao.total(pager);
+		
+		pager.setTotal(total);
+		
+		return memberDao.list(pager);
 	}
 
 	@Override

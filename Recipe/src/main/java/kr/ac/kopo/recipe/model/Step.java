@@ -10,13 +10,7 @@ public class Step {
 	private String tools;
 	private String tip;
 	private String imagepath;
-	
-	public String getImagepath() {
-		return imagepath;
-	}
-	public void setImagepath(String imagepath) {
-		this.imagepath = imagepath;
-	}
+
 	public int getStepid() {
 		return stepid;
 	}
@@ -58,6 +52,12 @@ public class Step {
 	}
 	public void setTip(String tip) {
 		this.tip = tip;
+	}
+	public String getImagepath() {
+		return imagepath;
+	}
+	public void setImagepath(String imagepath) {
+		this.imagepath = imagepath;
 	}
 		
 }
