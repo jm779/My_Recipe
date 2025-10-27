@@ -49,6 +49,41 @@ public class Pager {
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
-
-
+	public String getQuery() {
+	      String query = "";
+	      
+	      if(searchCondition > 0)
+	         query = "&search=" + searchCondition + "&keyword=" + keyword;
+	      
+	      return query;
+	   }
+	
+	public int getLast() {
+		return (int) Math.ceil(total / perPage);
+	}
+	public int getNext() {
+	      int next = (((page - 1) / perGroup) + 1) * perGroup + 1;
+	      int last = getLast();
+	      
+	      return next < last ? next : last;
+	   }
+   public int getPrev() {
+      return page <= perGroup ? 1 : (((page - 1) / perGroup) - 1) * perGroup + 1;
+   }
+	   
+   public List<Integer> getList(){
+	      ArrayList<Integer> list = new ArrayList<Integer>();
+	      
+	      int startPage = (((page - 1) / perGroup) + 0) * perGroup + 1;
+	      int last = getLast();
+	      
+	      for(int i=startPage; i < (startPage + perGroup) && i <= last; i++)
+	         list.add(i);
+	      
+	      if(list.isEmpty()) {
+	         list.add(1);
+	      }
+	      
+	      return list;
+	   }
 }

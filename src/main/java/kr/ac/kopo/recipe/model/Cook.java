@@ -14,6 +14,7 @@ public class Cook {
 	private String recommend;
 	private String content;
 	private String userid;
+	private String mainimagepath;
 	
 	public int getRecipeid() {
 		return recipeid;
@@ -81,6 +82,13 @@ public class Cook {
 	public void setUserid(String userid) {
 		this.userid = userid;
 	}
+	public String getMainimagepath() {
+		return mainimagepath;
+	}
+	public void setMainimagepath(String mainimagepath) {
+		this.mainimagepath = mainimagepath;
+	}
+	
 	
 }
 

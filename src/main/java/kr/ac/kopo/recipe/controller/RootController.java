@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.ac.kopo.recipe.model.Member;
 import kr.ac.kopo.recipe.service.MemberService;
@@ -65,5 +67,15 @@ public class RootController {
 	@GetMapping("/goadd")
 	String goadd() {
 		return "redirect:/cook/add";
+	}
+	
+	//중복확인
+	@ResponseBody
+	@GetMapping("/check_id/{id}")
+	String checkId(@PathVariable String id) {
+		if(service.checkId(id))
+			return "OK";
+		
+		return "FAIL";
 	}
 }

@@ -1,7 +1,7 @@
 window.addEventListener("load", () => {
-    document.querySelectorAll(".photo_btn").forEach((btn) => {
-        btn.addEventListener("click", function(){
-            const ul = btn.parentElement.querySelector("ul");
+    document.querySelector("#photo_btn").addEventListener("click", function(){
+            const btn = this;
+            const ul = this.parentElement.querySelector("ul");
             const li = document.createElement("li");
             li.style.listStyle = "none";
             
@@ -26,12 +26,10 @@ window.addEventListener("load", () => {
                     reader.readAsDataURL(file);
                 }
             });
-        })
-                
-
+            
             li.appendChild(input);
             ul.appendChild(li);
-            input.click();  
+            input.click(); 
 
+        });
     });
-});

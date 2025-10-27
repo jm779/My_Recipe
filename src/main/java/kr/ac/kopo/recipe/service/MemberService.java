@@ -29,5 +29,7 @@ public interface MemberService{
 
 	Member item(String userid);
 
+	boolean checkId(String id);
+
 
 }
