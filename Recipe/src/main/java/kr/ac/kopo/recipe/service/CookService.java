@@ -21,5 +21,9 @@ public interface CookService{
 	Cook detail(int recipeid);
 
 	List<Step> listByRecipeId(int recipeid);
+
+	List<Cook> getAllRecommended();
+
+	void recommend(int recipeid);
 	
 }

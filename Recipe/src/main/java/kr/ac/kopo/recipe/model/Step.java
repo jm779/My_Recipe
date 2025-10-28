@@ -1,5 +1,6 @@
 package kr.ac.kopo.recipe.model;
 
+
 public class Step {
 	private int stepid;
 	private int recipeid;

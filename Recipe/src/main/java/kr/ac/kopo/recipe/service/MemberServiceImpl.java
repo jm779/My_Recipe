@@ -77,4 +77,15 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.item(userid);
 	}
 
+	@Override
+	public boolean checkId(String id) {
+		Member item = memberDao.item(id);
+		
+		if(item == null)
+			return true;
+		
+		
+		return false;
+	}
+
 }

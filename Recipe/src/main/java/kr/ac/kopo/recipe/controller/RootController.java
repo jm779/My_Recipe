@@ -1,24 +1,47 @@
 package kr.ac.kopo.recipe.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.ac.kopo.recipe.model.Cook;
 import kr.ac.kopo.recipe.model.Member;
+import kr.ac.kopo.recipe.model.Notice;
+import kr.ac.kopo.recipe.service.CookService;
 import kr.ac.kopo.recipe.service.MemberService;
+import kr.ac.kopo.recipe.service.NoticeService;
 
 @Controller
 public class RootController {
 	@Autowired
 	private MemberService service;
 	
+	@Autowired
+	private CookService cookService;
+	
+	@Autowired
+	private NoticeService noticeService;
+	
 	@GetMapping("/")
-	String index() {
+	String index(Model model, HttpSession session) {
+		Member loginMember = (Member) session.getAttribute("member");
+		
+		List<Cook> hotList = cookService.getAllRecommended();
+		List<Notice> noticeList = noticeService.getAll();
+		
+		model.addAttribute("hotList",hotList);
+		model.addAttribute("noticeList",noticeList);
+		model.addAttribute("loginMember",loginMember);
+		
 		return "index";
 	}
 	
@@ -65,5 +88,15 @@ public class RootController {
 	@GetMapping("/goadd")
 	String goadd() {
 		return "redirect:/cook/add";
+	}
+	
+	//중복확인
+	@ResponseBody
+	@GetMapping("/check_id/{id}")
+	String checkId(@PathVariable String id) {
+		if(service.checkId(id))
+			return "OK";
+		
+		return "FAIL";
 	}
 }

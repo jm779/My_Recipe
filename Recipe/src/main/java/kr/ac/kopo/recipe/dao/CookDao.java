@@ -23,5 +23,9 @@ public interface CookDao {
 
 	List<Step> getStepsByRecipeid(int recipeid);
 	
+	List<Cook> getRecommended();
+
+	void recommend(int recipeid);
+
 
 }

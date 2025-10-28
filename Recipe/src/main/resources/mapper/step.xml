@@ -40,7 +40,7 @@
 		WHERE recipeid = #{recipeid}
 	</delete>
 	
-	<select id="listByRecipeId" parameterType="int" resultType="kr.ac.kopo.recipe.model.Step" >
+	<select id="listByRecipeId" parameterType="int" resultType="Step" >
 		SELECT * FROM step
 		WHERE recipeid = #{recipeid}
 		ORDER BY step_order

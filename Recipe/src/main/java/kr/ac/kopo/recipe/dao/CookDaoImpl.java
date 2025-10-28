@@ -54,4 +54,16 @@ public class CookDaoImpl implements CookDao {
 		return sql.selectList("cook.getStepsByRecipeid", recipeid);
 	}
 
+	@Override
+	public List<Cook> getRecommended() {
+		return sql.selectList("cook.getRecommended");
+	}
+
+	@Override
+	public void recommend(int recipeid) {
+		sql.update("cook.recommend", recipeid);
+	}
+
+
+	
 }

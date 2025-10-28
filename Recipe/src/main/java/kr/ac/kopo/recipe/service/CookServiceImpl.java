@@ -21,7 +21,6 @@ public class CookServiceImpl implements CookService {
 	@Autowired
 	private StepDao stepDao;
 	
-	
 	@Override
 	@Transactional
 	public void addCookWithStep(Cook cook, String userid) {
@@ -30,7 +29,6 @@ public class CookServiceImpl implements CookService {
 	        System.out.println("Step: " + s.getContent() + ", " + s.getIngredient());
 	    }
 		
-	    
 		cook.setUserid(userid);
 		cookDao.addCook(cook);
 		
@@ -43,6 +41,11 @@ public class CookServiceImpl implements CookService {
 				step.setStepOrder(order++);
 				stepDao.add(step);
 			}
+		}
+		
+		for(Step step : steps) {
+			System.out.println("Saving Step: " + step.getStepOrder() + ", imagePath: " + step.getImagepath());
+			
 		}
 	}
 
@@ -95,5 +98,21 @@ public class CookServiceImpl implements CookService {
 	public List<Step> listByRecipeId(int recipeid) {
 		return stepDao.listByRecipeId(recipeid);
 	}
+
+	
+	@Override
+	public List<Cook> getAllRecommended() {
+		return cookDao.getRecommended();
+	}
+	
+
+	@Override
+	public void recommend(int recipeid) {
+		cookDao.recommend(recipeid);
+	}
+
+	
+
+	
 
 }

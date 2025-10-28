@@ -9,6 +9,8 @@
 		<result property="comment" column="comment" />
 		<result property="link" column="link" />
 		<result property="userid" column="userid" />
+		<result property="mainimagepath" column="mainimagepath" />
+		<result property="recommend" column="recommend" />
 	</resultMap>
 
 	<select id="list" resultType="Cook">
@@ -20,11 +22,11 @@
 		<selectKey keyProperty="recipeid" resultType="int" order="BEFORE">
 			SELECT cook_seq.nextval FROM dual
 		</selectKey>
-		INSERT INTO cook(recipeid, recipetitle, "comment", link, userid)
-		VALUES (#{recipeid}, #{recipetitle}, #{comment}, #{link}, #{userid})
+		INSERT INTO cook(recipeid, recipetitle, "comment", link, userid, mainimagepath)
+		VALUES (#{recipeid}, #{recipetitle}, #{comment}, #{link}, #{userid}, #{mainimagepath})
 	</insert>
 
-	<insert id="addStep" parameterType="step">
+	<insert id="addStep" parameterType="Step">
 		INSERT INTO step(recipeid, step_order, content, ingredient, tools, tip, imagepath)
 		VALUES (#{recipeid}, #{stepOrder}, #{content}, #{ingredient}, #{tools}, #{tip}, #{imagepath})
 	</insert>
@@ -49,7 +51,7 @@
 		WHERE recipeid = #{recipeid}
 	</update>
 		
-	<update id="stepUpdate" parameterType="step">
+	<update id="stepUpdate" parameterType="Step">
 		UPDATE step
 		SET content= #{content},
 		ingredient = #{ingredient},
@@ -75,10 +77,21 @@
 		WHERE recipeid = #{recipeid}
 	</select>
 
-	<select id="getStepsByRecipeid" resultType="step">
+	<select id="getStepsByRecipeid" resultType="Step">
 		SELECT * FROM step
 		WHERE recipeid = #{recipeid}
 		ORDER BY step_order
 	</select>
-
+	
+	<select id="getRecommended" resultType="Cook">
+		SELECT *
+		FROM cook
+		WHERE recommend = '1'
+	</select>
+	
+	<update id="recommend" parameterType="int">
+		UPDATE cook SET recommend = 1 
+		WHERE recipeid = #{recipeid}
+	</update>
+	
 </mapper>

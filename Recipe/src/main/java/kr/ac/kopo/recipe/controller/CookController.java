@@ -33,6 +33,7 @@ public class CookController {
 
 	@Autowired
 	private MemberService memberService;
+	
 
 	@GetMapping("/add")
 	public String add() {
@@ -50,55 +51,27 @@ public class CookController {
 	        steps = new ArrayList<>();
 	        cook.setSteps(steps);
 	    }
-	    int index = 0;
+	    
+	    for (int i = 0; i < steps.size(); i++) {
+            Step step = steps.get(i);
+            step.setImagepath("");
 
-	    for (Step step : steps) {
-	        step.setImagepath("");
+            if (file != null && i < file.length && !file[i].isEmpty()) {
+                String fileName = UUID.randomUUID().toString() + "_" + file[i].getOriginalFilename();
+                File img = new File(uploadPath, fileName);
 
-	        if (file != null && index < file.length && !file[index].isEmpty()) {
-	            String fileName = UUID.randomUUID().toString() + "_" + file[index].getOriginalFilename();
-	            File img = new File(uploadPath, fileName);
+                try {
+                    file[i].transferTo(img);
+                    step.setImagepath("/upload/" + fileName);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
-	            try {
-	                file[index].transferTo(img);
-	                step.setImagepath("/upload/" + fileName);
-	            } catch (Exception e) {
-	                e.printStackTrace();
-	            }
-	        }
-
-	        index++;
-	    }
-
-	    cookService.addCookWithStep(cook, userid);
-	    return "redirect:/cook/list";
-	}
-
-
-	/*
-	 * @PostMapping("/add") public String addSubmit(@ModelAttribute Cook cook, Step
-	 * step, HttpSession session,
-	 * 
-	 * @RequestParam(value = "file", required = false) MultipartFile[] file) {
-	 * String userid = (String) session.getAttribute("userid");
-	 * cook.setUserid(userid);
-	 * 
-	 * step.setImagepath("");
-	 * 
-	 * for (MultipartFile f : file) { if (!f.isEmpty()) { String fileName =
-	 * UUID.randomUUID().toString() + "_" + f.getOriginalFilename(); File img = new
-	 * File(uploadPath, fileName);
-	 * 
-	 * try { f.transferTo(img); step.setImagepath("/upload/" + fileName); } catch
-	 * (Exception e) { e.printStackTrace(); } } }
-	 * 
-	 * List<Step> stepList = new ArrayList<>(); stepList.add(step);
-	 * cook.setSteps(stepList);
-	 * 
-	 * 
-	 * cookService.addCookWithStep(cook, userid);
-	 * cookService.getStepsByRecipeid(recipeid); return "redirect:/cook/list"; }
-	 */
+        cookService.addCookWithStep(cook, userid);
+        return "redirect:/cook/list";
+    }
 
 	@GetMapping("/list")
 	String list(HttpSession session, Model model) {
@@ -112,6 +85,7 @@ public class CookController {
 			Member member = memberService.item(userid);
 			model.addAttribute("item", member);
 		}
+		
 		return "cook/list";
 	}
 
@@ -129,9 +103,7 @@ public class CookController {
 	@PostMapping("/update/{recipeid}")
 	public String update(@PathVariable int recipeid, @ModelAttribute Cook item) {
 		item.setRecipeid(recipeid);
-
 		cookService.update(item, item.getSteps());
-
 		return "redirect:/cook/list";
 	}
 
@@ -168,6 +140,20 @@ public class CookController {
 		session.invalidate();
 
 		return "redirect:/";
+	}
+	
+	
+	@PostMapping("/cook/recommend/{recipeid}")
+	public String recommend(@PathVariable int recipeid, HttpSession session) {
+		Member loginMember = (Member) session.getAttribute("member");
+		if (loginMember == null) {
+			return "redirect:/login";
+		}
+		
+		cookService.recommend(recipeid);
+		return "redirect:/";
+		
+		
 	}
 
 }

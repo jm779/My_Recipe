@@ -8,13 +8,11 @@ public class Cook {
 	private String comment;
 	private String link;
 	private List<Step> steps;
-	private String postid;
-	private String posttitle;
-	private String postviews;                               
-	private String recommend;
 	private String content;
 	private String userid;
-	
+	private String mainimagepath;
+	private String recommend;
+
 	public int getRecipeid() {
 		return recipeid;
 	}
@@ -45,30 +43,6 @@ public class Cook {
 	public void setSteps(List<Step> steps) {
 		this.steps = steps;
 	}
-	public String getPostid() {
-		return postid;
-	}
-	public void setPostid(String postid) {
-		this.postid = postid;
-	}
-	public String getPosttitle() {
-		return posttitle;
-	}
-	public void setPosttitle(String posttitle) {
-		this.posttitle = posttitle;
-	}
-	public String getPostviews() {
-		return postviews;
-	}
-	public void setPostviews(String postviews) {
-		this.postviews = postviews;
-	}
-	public String getRecommend() {
-		return recommend;
-	}
-	public void setRecommend(String recommend) {
-		this.recommend = recommend;
-	}
 	public String getContent() {
 		return content;
 	}
@@ -81,6 +55,19 @@ public class Cook {
 	public void setUserid(String userid) {
 		this.userid = userid;
 	}
+	public String getMainimagepath() {
+		return mainimagepath;
+	}
+	public void setMainimagepath(String mainimagepath) {
+		this.mainimagepath = mainimagepath;
+	}
+	public String getRecommend() {
+		return recommend;
+	}
+	public void setRecommend(String recommend) {
+		this.recommend = recommend;
+	}
+	
 	
 }
 
