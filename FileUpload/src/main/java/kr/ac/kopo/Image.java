@@ -23,6 +23,5 @@ public class Image {
 	public void setUuid(String uuid) {
 		this.uuid = uuid;
 	}
-	
-	
+
 }

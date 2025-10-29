@@ -27,7 +27,6 @@ window.addEventListener("load", () => {
         const uploadFile = document.querySelector("input[name='uploadFile']");
 
         console.dir(uploadFile);
-        
 
         formData.append("title", title.value);
         formData.append("uploadFile", uploadFile.files[0]);
