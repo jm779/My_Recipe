@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="book">
+
+	<sql id="search">
+		SELECT * FROM book2
+		
+		<where>
+			<if test="search == 1">
+				code=#{keyword}
+			</if>
+			
+			<if test="search == 2">
+				title LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+			</if>
+			
+			<if test="search == 3">
+				publisher LIKE CONCAT(CONCAT('%', #{keyword}), '%')
+			</if>
+		</where>		
+		ORDER BY code
+	</sql>
+
+	<select id="total" resultType="Integer">
+		SELECT COUNT(*) FROM (<include refid="search"></include>) T1
+	</select>
+
+	<select id="list" resultType="Book">
+		SELECT * FROM 
+			(SELECT T1.*, ROWNUM rnum FROM
+			    (<include refid="search"></include>) T1)
+			    
+		<if test="perPage != 0">	    
+			WHERE rnum BETWEEN ((#{page} - 1) * #{perPage}) + 1 AND (#{page} * #{perPage})
+		</if>
+	</select>
+
+	<insert id="add">
+		INSERT INTO book2
+		VALUES (BOOK2_SEQ.NEXTVAL, #{title}, #{publisher}, #{price}, #{pubDate})
+		
+		<selectKey keyProperty="code" resultType="Long" order="AFTER">
+			SELECT BOOK2_SEQ.currval FROM dual
+		</selectKey>
+	</insert>
+	
+	<update id="update">
+		UPDATE book2
+		SET code=#{code}, title=#{title}, publisher=#{publisher}, price=#{price}, pub_date=#{pubDate}
+		WHERE code=#{code} 
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM book2
+		WHERE code=#{code}
+	</delete>
+	
+	<resultMap type="Book" id="BookMap" autoMapping="true">
+		<id column="code" property="code"/>
+		
+		<collection property="attachs" column="book_code" javaType="ArrayList" ofType="Attach" autoMapping="true">
+			<id column="attach_code" property="code"/>
+		</collection>
+		
+		<collection property="reviews" column="book_code" javaType="ArrayList" ofType="Review" autoMapping="true">
+			<id column="review_code" property="code"/>
+		</collection>
+	</resultMap>
+	
+	<select id="item" resultMap="BookMap">
+		SELECT 
+			b.*,
+			a.*,
+			a.code attach_code
+			r.code review_code
+		FROM book2 b
+		LEFT JOIN attach a ON b.code=a.book_code
+		LEFT JOIN review r ON b.code=r.book_code
+		WHERE b.code=#{code}
+	</select>
+	
+	<insert id="add_attach" parameterType="kr.ac.kopo.bookshop.model.Attach">
+		INSERT INTO attach (code, code2, filename, uuid)
+		VALUES (IMAGE_SEQ.nextval, #{book_code}, #{filename}, #{uuid})
+	</insert>
+	
+	<delete id="delete_attach">
+		DELETE FROM attach
+		WHERE code=#{code}
+	</delete>
+	
+	<insert id="add_review">
+		INSERT INTO review
+		VALUES (REVIEW_SEQ.nextval, #{bookCode}, #{memberId}, #{contents})
+	</insert>
+	
+</mapper>
