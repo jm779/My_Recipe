@@ -104,15 +104,12 @@ public class CookServiceImpl implements CookService {
 	public List<Cook> getAllRecommended() {
 		return cookDao.getRecommended();
 	}
-	
 
 	@Override
-	public void recommend(int recipeid) {
-		cookDao.recommend(recipeid);
+	public void recommend(int recipeid, String userid) {
+		cookDao.recommend(recipeid, userid);
 	}
-
 	
-
 	
 
 }

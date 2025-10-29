@@ -62,7 +62,7 @@
 
               <c:if test="${not empty step.imagepath}">
                 <div class="mb-2" style="width: 250px; height: 250px;">
-                  <img src="${step.imagepath}" alt="요리 이미지" style="width: 100%" height="100%" />
+                  <img src="${pageContext.request.contextPath}/upload/${step.imagepath}" alt="요리 이미지" style="width: 100%" height="100%" />
                 </div>
               </c:if>
 
@@ -85,14 +85,22 @@
         </fieldset>
       </form>
     </div>
-    <div class="d-flex mb-4" style="width: 200px; height: 70px; background-color: pink; 
-    	text-align: center; padding-top: 20px; margin: 0 auto;">
-    	<img src="${pageContext.request.contextPath}/resources/image/recommend_enroll.png" alt="recommend" 
-    		style="width: 40px; height: 35px;">
-    		<form action="" >
-    			<button type="submit" style="border:none; background-color: pink;">추천레시피로 등록</button>
-    		</form>
-    </div>
+    <div class="d-flex justify-content-center gap-3 my-4">
+  	<!-- 추천 레시피 등록 버튼 -->
+	  <form action="${pageContext.request.contextPath}/cook/recommend/${recipeid}" method="post">
+	    <button type="submit" class="btn btn-outline-danger d-flex align-items-center px-3">
+	      <img src="${pageContext.request.contextPath}/resources/image/recommend_enroll.png" alt="recommend"
+	           style="width: 20px; height: 20px; margin-right: 8px;">
+	      추천레시피로 등록
+	    </button>
+	  </form>
+
+	 <!-- MY 목록 보기 버튼 -->
+	  <a href="${pageContext.request.contextPath}/member/mypage" class="btn btn-outline-secondary px-4">
+	    나의 요리목록
+	  </a>
+</div>
+
   </main>
 <jsp:include page="../include/footer.jsp" />
 </body>

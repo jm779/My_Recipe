@@ -4,7 +4,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title></title>
+  <title>레시피 등록</title>
   <script src="${pageContext.request.contextPath}/resources/js/img_add.js"></script>
   <script src="${pageContext.request.contextPath}/resources/js/main_img.js"></script>
   <script src="${pageContext.request.contextPath}/resources/js/step_add.js"></script>
@@ -41,6 +41,10 @@
         
     	<!-- 대표사진 -->
 		<div id="main_img_container" style="width: 450px; height: 250px; background-color: #e0e0e0; margin-bottom: 10px; position: relative; overflow: hidden;">	  
+		  <!-- 숨겨진 대표 이미지 업로드 input -->
+		  <input type="file" name="mainfile" id="mainfile" style="display: none;" />
+		  
+		  
 		  <!-- 안내 문구 (이미지 아래) -->
 		  <div id="img_change" style="position: absolute; bottom: 10px; right: 23px; margin-bottom: 30px;
 		  		color: #555; font-size: 14px; z-index: 0;">
@@ -90,8 +94,10 @@
 
                   <div class="mb-2">
                     <label><strong>재료</strong></label>
-                    <div id="ingre_input" class="gap-2">
-                      <input type="text" name="steps[${status.index}].ingredient" placeholder="재료" class="form-control" />
+                    <div id="ingre_input" class="row gap-2">
+                    	<div class="col-3 mb-2">
+                      		<input type="text" name="steps[${status.index}].ingredient" placeholder="재료" class="form-control" />
+                    	</div>
                     </div>
                     <button id="add_ingre" type="button" class="btn btn-outline-primary">+</button>
                     <button id="delete_ingre" type="button" class="btn btn-outline-primary">-</button>
@@ -99,8 +105,10 @@
 
                   <div class="mb-2">
                     <label><strong>도구</strong></label>
-                    <div id="tools_input" class="gap-2">
-                      <input type="text" name="steps[${status.index}].tools" placeholder="도구" class="form-control" />
+                    <div id="tools_input" class="row gap-2">
+                    	<div class="col-3 mb-2">
+                      		<input type="text" name="steps[${status.index}].tools" placeholder="도구" class="form-control" />
+                    	</div>
                     </div>
                     <button id="add_tools" type="button" class="btn btn-outline-primary" onclick="addTools(this)">+</button>
                     <button id="delete_tools" type="button" class="btn btn-outline-primary" onclick="addTools(this)">-</button>
@@ -108,8 +116,10 @@
 
                   <div>
                     <label><strong>팁</strong></label>
-                    <div id="tip_input" class="gap-2">
-                      <input type="text" name="steps[${status.index}].tip" placeholder="팁" class="form-control" />
+                    <div id="tip_input" class="row gap-2">
+                    	<div class="col-3 mb-2">
+                      		<input type="text" name="steps[${status.index}].tip" placeholder="팁" class="form-control" />
+                    	</div>
                     </div>
                     <button id="add_tip" type="button" class="btn btn-outline-primary" onclick="addTip(this)">+</button>
                     <button id="delete_tip" type="button" class="btn btn-outline-primary" onclick="addTip(this)">-</button>
@@ -157,8 +167,49 @@
                   <button id="delete_tip" type="button" class="btn btn-outline-primary" onclick="addTip(this)">-</button>
                 </div>
               </div>
-            </c:otherwise>
+            </c:otherwise>      
           </c:choose>
+              <!-- step 추가 시, 추가 될 step -->
+            <template id="step-template">
+            	<div class="step border p-3 mb-3">
+                <h5 class="step-title">STEP</h5>
+                <button type="button" class="btn btn-danger btn-sm mb-2" onclick="removeBtn(this)">-</button>
+                <input type="text" name="steps[0].content" placeholder="조리내용을 적어보세요!" class="form-control mb-2"/>
+
+                <div>
+                  <ul id="file"></ul>
+                  <button type="button" class="photo_btn">이미지 추가</button>
+                  <button id="delete_img" type="button" class="btn btn-danger btn-sm mb-2">-</button>
+                </div>
+
+                <div class="mb-2">
+                  <label><strong>재료</strong></label>
+                  <div id="ingre_input" class="row gap-2">
+                    <input type="text" name="steps[0].ingredient" placeholder="재료" class="form-control" />
+                  </div>
+                  <button id="add_ingre" type="button" class="btn btn-outline-primary">+</button>
+                  <button id="delete_ingre" type="button" class="btn btn-outline-primary">-</button>
+                </div>
+
+                <div class="mb-2">
+                  <label><strong>도구</strong></label>
+                  <div id="tools_input" class="row gap-2">
+                    <input type="text" name="steps[0].tools" placeholder="도구" class="form-control" />
+                  </div>
+                  <button id="add_tools" type="button" class="btn btn-outline-primary" onclick="addTools(this)">+</button>
+                  <button id="delete_tools" type="button" class="btn btn-outline-primary" onclick="addTools(this)">-</button>
+                </div>
+
+                <div>
+                  <label><strong>팁</strong></label>
+                  <div id="tip_input" class="row gap-2">
+                    <input type="text" name="steps[0].tip" placeholder="팁" class="form-control" />
+                  </div>
+                  <button id="add_tip" type="button" class="btn btn-outline-primary" onclick="addTip(this)">+</button>
+                  <button id="delete_tip" type="button" class="btn btn-outline-primary" onclick="addTip(this)">-</button>
+                </div>
+              </div>
+            </template> 
         </fieldset>
 
         <div class="text-end mb-3">
@@ -167,6 +218,7 @@
 
         <div class="text-center">
           <button id="send" type="submit" class="btn btn-success">제출</button>
+          <a href="/member/mypage" class="btn btn-outline-secondary mx-2">목록</a>
         </div>
       </form>
     </div>

@@ -18,8 +18,8 @@ window.addEventListener("load", () => {
                     reader.onload = function(e){
                         const img = document.createElement("img");
                         img.src = e.target.result;
-                        img.style.width = "150px";
-                        img.style.height = "100px";
+                        img.style.width = "200px";
+                        img.style.height = "150px";
                         img.style.display = "block";
                         li.appendChild(img);
                     };

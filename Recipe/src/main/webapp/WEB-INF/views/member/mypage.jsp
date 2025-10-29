@@ -55,7 +55,11 @@
             </c:if>
           </c:forEach>
         </div>
-
+        
+        <c:if test="${empty list}">
+          <div class="alert alert-info text-center">작성한 레시피가 없습니다.</div>
+        </c:if>
+        
         <div class="pagination pagination-sm justify-content-center">
           <div class="page-item"><a href="?page=1${pager.query}" class="page-link">처음</a></div>
           <div class="page-item"><a href="?page=${pager.prev}${pager.query}" class="page-link">이전</a></div>
@@ -69,10 +73,6 @@
           <div class="page-item"><a href="?page=${pager.next}${pager.query}" class="page-link">다음</a></div>
           <div class="page-item"><a href="?page=${pager.last}${pager.query}" class="page-link">마지막</a></div>
         </div>
-
-        <c:if test="${empty list}">
-          <div class="alert alert-info text-center">작성한 레시피가 없습니다.</div>
-        </c:if>
       </div>
     </div>
   </main>

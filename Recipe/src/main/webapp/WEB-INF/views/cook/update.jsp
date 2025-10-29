@@ -42,9 +42,11 @@
 		<div id="main_img_container" style="width: 450px; height: 250px; background-color: #e0e0e0; margin-bottom: 10px; position: relative; overflow: hidden;">	  
 		  
 		  <c:if test="${not empty item.mainimagepath}">
-    		<img src="${pageContext.request.contextPath}/upload/${item.mainimagepath}" class="preview"
+    		<img src="${pageContext.request.contextPath}${item.mainimagepath}" class="preview"
          		style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; cursor: pointer;" />
   		  </c:if>
+		  
+		  <input type="file" name="mainfile" id="mainfile" style="display: none;" />
 		  
 		  <!-- 안내 문구 (이미지 아래) -->
 		  <div id="img_change" style="position: absolute; bottom: 10px; right: 25px; margin-bottom: 30px;
@@ -86,8 +88,8 @@
 
               <div>
                 <ul id="file"></ul>
-                <input type="file" name="file" id="fileInput${status.index}" multiple style="display: none;" />
-                <img src="${step.imagepath}" alt="요리 이미지" style="width: 250px;" height="250px;" />
+                <input type="file" name="file[${status.index}]" id="fileInput${status.index}" multiple style="display: none;" />
+                <img src="${pageContext.request.contextPath}${step.imagepath}" alt="요리 이미지" style="width: 250px;" height="250px;" />
                 <button type="button" id="photo_btn">이미지 변경</button>
               </div>
 

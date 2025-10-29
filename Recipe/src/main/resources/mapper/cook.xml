@@ -47,7 +47,8 @@
 		UPDATE cook
 		SET recipetitle = #{recipetitle},
 		"comment" = #{comment},
-		link = #{link}
+		link = #{link},
+		mainimagepath = #{mainimagepath}
 		WHERE recipeid = #{recipeid}
 	</update>
 		
@@ -89,9 +90,8 @@
 		WHERE recommend = '1'
 	</select>
 	
-	<update id="recommend" parameterType="int">
-		UPDATE cook SET recommend = 1 
-		WHERE recipeid = #{recipeid}
-	</update>
-	
+	<insert id="recommend">
+		INSERT INTO cook_recommend (recipeid, userid)
+		VALUES (#{recipeid}, #{userid})
+	</insert>
 </mapper>

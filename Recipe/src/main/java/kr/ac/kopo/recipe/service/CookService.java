@@ -24,6 +24,6 @@ public interface CookService{
 
 	List<Cook> getAllRecommended();
 
-	void recommend(int recipeid);
+	void recommend(int recipeid, String userid);
 	
 }

@@ -25,7 +25,7 @@ public interface CookDao {
 	
 	List<Cook> getRecommended();
 
-	void recommend(int recipeid);
+	void recommend(int recipeid, String userid);
 
 
 }

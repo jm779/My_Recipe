@@ -3,55 +3,71 @@ window.addEventListener("load", () => {
     const toolsDiv = document.getElementById("tools_input");
     const tipDiv = document.getElementById("tip_input");
 
-    document.getElementById("add_ingre").addEventListener("click", function() {
-        const ingre_input = document.createElement("input");
-        ingre_input.setAttribute("type", "text");
-        ingre_input.setAttribute("name", "steps[0].ingredient");
-        ingre_input.setAttribute("placeholder", "재료");
-        ingre_input.setAttribute("class", "form-control mt-2");
-        ingreDiv.appendChild(ingre_input);
+    document.getElementById("add_ingre").addEventListener("click", function () {
+        const inputCol = document.createElement("div");
+        inputCol.className = "col-3 mb-2"; // 한 줄에 4개씩
+
+        const input = document.createElement("input");
+        input.type = "text";
+        input.name = "steps[0].ingredient";
+        input.placeholder = "재료";
+        input.className = "form-control";
+
+        inputCol.appendChild(input);
+        ingreDiv.appendChild(inputCol);
     });
 
+
     document.getElementById("delete_ingre").addEventListener("click", function() {
-        const ingre_inputs = ingreDiv.getElementsByTagName("input");
-        if (ingre_inputs.length > 1) {
-            ingreDiv.removeChild(ingre_inputs[ingre_inputs.length - 1]);
+        const cols = ingreDiv.getElementsByClassName("col-3");
+        if (cols.length > 1) {
+            ingreDiv.removeChild(cols[cols.length - 1]);
         } else {
             alert("최소 하나의 재료를 적어주세요!");
         }
     });
 
     document.getElementById("add_tools").addEventListener("click", function() {
-        const tools_input = document.createElement("input");
-        tools_input.setAttribute("type", "text");
-        tools_input.setAttribute("name", "steps[0].tools");
-        tools_input.setAttribute("placeholder", "도구");
-        tools_input.setAttribute("class", "form-control mt-2");
-        toolsDiv.appendChild(tools_input);
+        const inputCol = document.createElement("div");
+        inputCol.className = "col-3 mb-2"; // 한 줄에 4개씩
+
+        const input = document.createElement("input");
+        input.type = "text";
+        input.name = "steps[0].tools";
+        input.placeholder = "도구";
+        input.className = "form-control";
+
+        inputCol.appendChild(input);
+        toolsDiv.appendChild(inputCol);
     });
 
     document.getElementById("delete_tools").addEventListener("click", function() {
-        const tools_inputs = toolsDiv.getElementsByTagName("input");
-        if (tools_inputs.length > 1) {
-            toolsDiv.removeChild(tools_inputs[tools_inputs.length - 1]);
+        const cols = toolsDiv.getElementsByClassName("col-3");
+        if (cols.length > 1) {
+            toolsDiv.removeChild(cols[cols.length - 1]);
         } else {
             alert("최소 하나의 도구를 적어주세요!");
         }
     });
 
     document.getElementById("add_tip").addEventListener("click", function() {
-        const tip_input = document.createElement("input");
-        tip_input.setAttribute("type", "text");
-        tip_input.setAttribute("name", "steps[0].tip");
-        tip_input.setAttribute("placeholder", "팁");
-        tip_input.setAttribute("class", "form-control mt-2");
-        tipDiv.appendChild(tip_input);
+        const inputCol = document.createElement("div");
+        inputCol.className = "col-3 mb-2";
+
+        const input = document.createElement("input");
+        input.type = "text";
+        input.name = "steps[0].tip";
+        input.placeholder = "팁";
+        input.className = "form-control";
+
+        inputCol.appendChild(input);
+        tipDiv.appendChild(inputCol);
     });
 
     document.getElementById("delete_tip").addEventListener("click", function() {
-        const tip_inputs = tipDiv.getElementsByTagName("input");
-        if (tip_inputs.length > 1) {
-            tipDiv.removeChild(tip_inputs[tip_inputs.length - 1]);
+        const cols = tipDiv.getElementsByClassName("col-3");
+        if (cols.length > 1) {
+            tipDiv.removeChild(cols[cols.length - 1]);
         } else {
             alert("최소 하나의 팁을 적어주세요!");
         }

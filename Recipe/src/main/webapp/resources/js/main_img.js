@@ -3,58 +3,56 @@ window.addEventListener("load", () => {
     const uploadBtn = document.querySelector("#main_img");
     const reselectBtn = document.querySelector("#reselect_img");
     const hint = container.querySelector("#img_change");
+    const input = document.getElementById("mainfile");
 
-    function triggerUpload() {
-        const input = document.createElement("input");
-        input.type = "file";
-        input.name = "mainFile";
-        input.accept = "image/*";
-        input.style.display = "none";
-
-        input.addEventListener("change", () => {
-            const file = input.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    const existingImg = container.querySelector("img.preview");
-                    if (existingImg) {
-                        existingImg.remove();
-                    }
-
-                    const img = document.createElement("img");
-                    img.src = e.target.result;
-                    img.classList.add("preview");
-                    img.style.position = "absolute";
-                    img.style.top = "0";
-                    img.style.left = "0";
-                    img.style.width = "100%";
-                    img.style.height = "100%";
-                    img.style.objectFit = "cover";
-                    img.style.cursor = "pointer";
-                    img.style.zIndex = "1";
-
-                    img.addEventListener("click", () => {
-                        uploadBtn.click();
-                    });
-
-                    container.appendChild(img);
-                    uploadBtn.style.display = "none";
-                    reselectBtn.style.display = "block";
-
-                    if (hint) {
-                        hint.style.backgroundColor = "rgba(255, 255, 255, 0.6)";
-                        hint.style.padding = "5px 10px";
-                        hint.style.borderRadius = "5px";
-                        hint.style.zIndex = "0";
-                    }
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-
-        container.appendChild(input);
+    function triggerUpload(){
         input.click();
     }
+    
+    function previewImage(file){
+        const reader = new FileReader();
+            reader.onload = function (e) {
+                const existingImg = container.querySelector("img.preview");
+                if (existingImg) {
+                    existingImg.remove();
+                }
+
+                const img = document.createElement("img");
+                img.src = e.target.result;
+                img.classList.add("preview");
+                img.style.position = "absolute";
+                img.style.top = "0";
+                img.style.left = "0";
+                img.style.width = "100%";
+                img.style.height = "100%";
+                img.style.objectFit = "cover";
+                img.style.cursor = "pointer";
+                img.style.zIndex = "1";
+
+                img.addEventListener("click", () => {
+                    uploadBtn.click();
+                });
+
+                container.appendChild(img);
+                uploadBtn.style.display = "none";
+                reselectBtn.style.display = "block";
+
+                if (hint) {
+                    hint.style.backgroundColor = "rgba(255, 255, 255, 0.6)";
+                    hint.style.padding = "5px 10px";
+                    hint.style.borderRadius = "5px";
+                    hint.style.zIndex = "0";
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+    
+        input.addEventListener("click", () => {
+            const file = input.files[0];
+            if(file){
+                previewImage(file);
+            }
+        });
 
     uploadBtn.addEventListener("click", triggerUpload);
     reselectBtn.addEventListener("click", triggerUpload);

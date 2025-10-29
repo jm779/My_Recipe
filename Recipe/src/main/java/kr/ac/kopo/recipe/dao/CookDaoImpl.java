@@ -60,8 +60,8 @@ public class CookDaoImpl implements CookDao {
 	}
 
 	@Override
-	public void recommend(int recipeid) {
-		sql.update("cook.recommend", recipeid);
+	public void recommend(int recipeid, String userid) {
+		sql.insert("cook.recommend",userid);
 	}
 
 
