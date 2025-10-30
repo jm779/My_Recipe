@@ -12,6 +12,7 @@ public class Pager {
 	
 	private int searchCondition;
 	private String keyword;
+	public int getPerPage;
 	
 	public int getPage() {
 		return page;

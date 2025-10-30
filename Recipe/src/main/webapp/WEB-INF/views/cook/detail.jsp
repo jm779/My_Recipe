@@ -62,7 +62,7 @@
 
               <c:if test="${not empty step.imagepath}">
                 <div class="mb-2" style="width: 250px; height: 250px;">
-                  <img src="${pageContext.request.contextPath}/upload/${step.imagepath}" alt="요리 이미지" style="width: 100%" height="100%" />
+                  <img src="${pageContext.request.contextPath}${step.imagepath}" alt="요리 이미지" style="width: 100%" height="100%" />
                 </div>
               </c:if>
 
@@ -87,7 +87,7 @@
     </div>
     <div class="d-flex justify-content-center gap-3 my-4">
   	<!-- 추천 레시피 등록 버튼 -->
-	  <form action="${pageContext.request.contextPath}/cook/recommend/${recipeid}" method="post">
+	  <form action="/cook/recommend" method="post">
 	    <button type="submit" class="btn btn-outline-danger d-flex align-items-center px-3">
 	      <img src="${pageContext.request.contextPath}/resources/image/recommend_enroll.png" alt="recommend"
 	           style="width: 20px; height: 20px; margin-right: 8px;">

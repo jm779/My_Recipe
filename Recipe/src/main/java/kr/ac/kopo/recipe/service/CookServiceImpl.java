@@ -63,16 +63,26 @@ public class CookServiceImpl implements CookService {
 		public void update(Cook item, List<Step> steps) {
 			cookDao.update(item);
 			
+			List<Step> existingSteps = stepDao.listByRecipeId(item.getRecipeid());
+			
 			stepDao.deleteByRecipeId(item.getRecipeid());
 			
 			int order = 1;
 			if (steps != null) {
-				for (Step step : steps) {
-					step.setRecipeid(item.getRecipeid());
-					step.setStepOrder(order++);
-					stepDao.add(step);
-				}
-			}
+		        for (int i = 0; i < steps.size(); i++) {
+		            Step newStep = steps.get(i);
+		            newStep.setRecipeid(item.getRecipeid());
+		            newStep.setStepOrder(order++);
+
+		            // 기존 이미지 경로 유지
+		            if ((newStep.getImagepath() == null || newStep.getImagepath().isEmpty()) 
+		                && i < existingSteps.size()) {
+		                newStep.setImagepath(existingSteps.get(i).getImagepath());
+		            }
+
+		            stepDao.add(newStep);
+		        }
+		    }
 		}
 
 	@Override

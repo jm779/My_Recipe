@@ -1,6 +1,8 @@
 package kr.ac.kopo.recipe.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,7 +63,11 @@ public class CookDaoImpl implements CookDao {
 
 	@Override
 	public void recommend(int recipeid, String userid) {
-		sql.insert("cook.recommend",userid);
+		Map<String, Object> param = new HashMap<>();
+	    param.put("recipenum", recipeid);
+	    param.put("userid", userid);
+	
+		sql.insert("cook.recommend",param);
 	}
 
 

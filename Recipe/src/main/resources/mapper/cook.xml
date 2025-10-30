@@ -90,8 +90,8 @@
 		WHERE recommend = '1'
 	</select>
 	
-	<insert id="recommend">
-		INSERT INTO cook_recommend (recipeid, userid)
-		VALUES (#{recipeid}, #{userid})
+	<insert id="recommend" parameterType="map">
+		INSERT INTO recommend (recipenum, userid)
+		VALUES (#{recipenum}, #{userid})
 	</insert>
 </mapper>

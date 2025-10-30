@@ -38,16 +38,13 @@ window.addEventListener("load", () => {
                 reselectBtn.style.display = "block";
 
                 if (hint) {
-                    hint.style.backgroundColor = "rgba(255, 255, 255, 0.6)";
-                    hint.style.padding = "5px 10px";
-                    hint.style.borderRadius = "5px";
-                    hint.style.zIndex = "0";
+                    hint.style.display = "none";
                 }
             };
             reader.readAsDataURL(file);
         }
     
-        input.addEventListener("click", () => {
+        input.addEventListener("change", () => {
             const file = input.files[0];
             if(file){
                 previewImage(file);

@@ -56,7 +56,7 @@
 		  </button>
 		  <!-- 재선택 버튼 (초기에는 숨김) -->
 		  <button id="reselect_img" type="button" style="position: absolute; bottom: 10px; right: 10px; z-index: 3; display: none;" class="btn btn-sm btn-light">
-		    사진 다시 선택
+		    이미지 클릭 시, 사진 재선택
 		  </button>	
 		  <!-- 대표사진 안내텍스트 -->
 		  <div class="d-flex" style="width: 110px; height: 35px; position: absolute; top: 10px; left: 10px; background-color: gray; justify-content: center; padding-top: 5px; z-index: 4;">

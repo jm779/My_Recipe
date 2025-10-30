@@ -1,5 +1,6 @@
 package kr.ac.kopo.recipe.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -37,11 +38,31 @@ public class MemberController {
 	
 	@GetMapping("/mypage")
 	public String mypage(@SessionAttribute Member member, Pager pager, Model model) {
-		List<Cook> list = memberService.list(pager);
-		model.addAttribute("list", list);
+	    List<Cook> userList = cookService.list();
+
+	    // 페이징 계산
+	    int total = userList.size();
+	    pager.setTotal(total);
+
+	    int start = (pager.getPage() - 1) * pager.getPerPage();
+	    int end = start + pager.getPerPage;
+	    if (end > total) {
+	        end = total;
+	    }
+
+	    List<Cook> pagedList = new ArrayList<>();
+	    for (int i = start; i < end; i++) {
+	        pagedList.add(userList.get(i));
+	    }
+
+	    model.addAttribute("userList", userList);
+	    model.addAttribute("pagedList", pagedList);
+	    model.addAttribute("pager", pager);
+	    model.addAttribute("userid", member.getUserid());
 
 	    return "member/mypage";
 	}
+
 
 	
 	@GetMapping("/detail/{recipeid}")

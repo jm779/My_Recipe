@@ -25,5 +25,13 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="kr.ac.kopo" />
+	
+	<interceptors>
+      <interceptor>
+         <mapping path="/post/**"/>
+         
+         <beans:bean class="kr.ac.kopo.recipe.interceptor.UserInterceptor"></beans:bean>
+      </interceptor>
+   </interceptors>
 
 </beans:beans>

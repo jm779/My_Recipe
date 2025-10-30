@@ -13,6 +13,7 @@
 		<typeAlias type="kr.ac.kopo.recipe.model.Cook" alias="cook"/>
 		<typeAlias type="kr.ac.kopo.recipe.model.Step" alias="step"/>
 		<typeAlias type="kr.ac.kopo.recipe.model.Notice" alias="notice"/>
+		<typeAlias type="kr.ac.kopo.recipe.model.Question" alias="question"/>
 	</typeAliases>
 
 	<mappers>
@@ -20,6 +21,7 @@
 		<mapper resource="mapper/cook.xml"/>
 		<mapper resource="mapper/step.xml"/>
 		<mapper resource="mapper/notice.xml"/>
+		<mapper resource="mapper/question.xml"/>
 	</mappers>
 	
 	
