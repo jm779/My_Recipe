@@ -44,7 +44,7 @@
 
       <!-- 등록 버튼 (오른쪽 하단) -->
       <div class="text-end mt-3">
-        <a href="${pageContext.request.contextPath}/question/questionadd.jsp" class="btn btn-outline-primary btn-sm">문의 등록</a>
+        <a href="${pageContext.request.contextPath}/question/questionadd" class="btn btn-outline-primary btn-sm">문의 등록</a>
       </div>
     </div>
   </main>
