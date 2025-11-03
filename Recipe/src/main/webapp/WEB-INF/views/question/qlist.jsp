@@ -12,7 +12,7 @@
   <main class="flex-grow-1">
     <div class="container my-2">
       <jsp:include page="../include/head.jsp" />
-      <div class="mt-4 mb-3"><h3>내 문의 내역</h3></div>
+      <div class="mt-4 mb-3"><h3>문의 내역</h3></div>
 
       <!-- 문의 목록 테이블 만들기 -->
       <table class="table table-sm" border="1">

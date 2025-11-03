@@ -134,6 +134,9 @@
                 <button type="button" class="btn btn-danger btn-sm mb-2" onclick="removeBtn(this)">-</button>
                 <input type="text" name="steps[0].content" placeholder="조리내용을 적어보세요!" class="form-control mb-2"/>
 
+				<!-- STEP 이미지 업로드 input 추가 -->
+				<input type="file" name="file" class="form-control mb-2" />
+				
                 <div>
                   <ul id="file"></ul>
                   <button type="button" id="photo_btn">이미지 추가</button>
