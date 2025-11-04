@@ -15,13 +15,9 @@
 	</resultMap>
 
 	<insert id="add" parameterType="Step">
-	    <selectKey keyProperty="stepid" resultType="int" order="BEFORE">
-	        SELECT step_seq.NEXTVAL FROM dual
-	    </selectKey>
-	    INSERT INTO step(stepid, recipeid, step_order, content, ingredient, tools, tip, imagepath)
-	    VALUES (#{stepid}, #{recipeid}, #{stepOrder}, #{content}, #{ingredient}, #{tools}, #{tip}, #{imagepath})
+		INSERT INTO step(recipeid, step_order, content, ingredient, tools, tip, imagepath)
+		VALUES (#{recipeid}, #{stepOrder}, #{content}, #{ingredient}, #{tools}, #{tip}, #{imagepath})
 	</insert>
-
 
 	<select id="stepitem" parameterType="int" resultType="Step">
 		SELECT *
@@ -35,7 +31,8 @@
 		SET content = #{content},
 			ingredient = #{ingredient},
 			tools = #{tools},
-			tip = #{tip}
+			tip = #{tip}, 
+			imagepath = #{imagepath}
 		WHERE stepid = #{stepid}	
 	</update>
 

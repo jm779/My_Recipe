@@ -10,7 +10,7 @@
 	
 	<insert id="save">
 		INSERT INTO question
-		VALUES (QUESTION_SEQ, SYSDATE, #{userid}, #{qtitle}, #{qcontent})
+		VALUES (QUESTION_SEQ, SYSDATE, #{qdate}, #{userid}, #{qtitle}, #{qcontent})
 	</insert>
 	
 	

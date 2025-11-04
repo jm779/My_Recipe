@@ -91,7 +91,7 @@
 	</select>
 	
 	<insert id="recommend" parameterType="map">
-		INSERT INTO recommend (recipenum, userid)
-		VALUES (#{recipenum}, #{userid})
+		INSERT INTO recommend (recommendnum, userid, writedate)
+		VALUES (#{recommendnum}, #{userid}, #{writedate})
 	</insert>
 </mapper>
