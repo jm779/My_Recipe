@@ -9,11 +9,10 @@
   <script src="${pageContext.request.contextPath}/resources/js/main_img.js"></script>
   <script src="${pageContext.request.contextPath}/resources/js/step_add.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  
 </head>
-
 <!-- 푸터고정 -->
 <body class="d-flex flex-column min-vh-100">
-
   <main class="flex-grow-1">
     <div class="container my-2">
       <jsp:include page="../include/head.jsp" />
@@ -27,7 +26,7 @@
         <h3 style="margin-left: 12px; margin-top: 10px;">레시피 작성하기</h3>
       </div>
 
-      <form method="post" action="${pageContext.request.contextPath}/cook/add" enctype="multipart/form-data" 
+      <form method="post" action="${pageContext.request.contextPath}/cook/add" enctype="multipart/form-data"
       		style="position: relative;">
         <div class="mb-3">
           <label class="form-label"><strong>레시피 제목</strong></label>
@@ -38,8 +37,15 @@
           <label class="form-label"><strong>레시피 소개</strong></label>
           <input type="text" name="comment" class="form-control" placeholder="간단한 소개를 적어보세요!"/>
         </div>
-        
+       
     	<!-- 대표사진 -->
+    	<div class="mb-3">
+    		<label class="form-label">대표사진</label>
+			<div class="img_box">
+				<img src="${pageContext.request.contextPath}${item.mainimagepath}" alt="대표사진" />
+			</div>	    	
+    	</div>
+    	
 		<div id="main_img_container" style="width: 450px; height: 250px; background-color: #e0e0e0; margin-bottom: 10px; position: relative; overflow: hidden;">	  
 		  <!-- 숨겨진 대표 이미지 업로드 input -->
 		  <input type="file" name="mainfile" id="mainfile" style="display: none;" />
@@ -60,9 +66,9 @@
 		  </button>	
 		  <!-- 대표사진 안내텍스트 -->
 		  <div class="d-flex" style="width: 110px; height: 35px; position: absolute; top: 10px; left: 10px; background-color: gray; justify-content: center; padding-top: 5px; z-index: 4;">
-		    <img src="${pageContext.request.contextPath}/resources/image/camera.png" alt="camera_icon" 
+		    <img src="${pageContext.request.contextPath}/resources/image/camera.png" alt="camera_icon"
 		      style="width: 20px; height: 20px; margin-top: 2px;">
-		    <p style="color: #fff; margin-left: 7px;">대표사진</p>          
+		    <p style="color: #fff; margin-left: 7px;">대표사진</p>     
 		  </div>
 		</div>
 
@@ -84,7 +90,7 @@
                   	
 	                  	<button type="button" class="btn btn-danger btn-sm mb-2" onclick="removeBtn(this)">
 	                  	 -</button>
-                  	</div>	 
+                  	</div>	
                   <input type="text" name="steps[${status.index}].content" placeholder="조리내용을 적어보세요!" class="form-control mb-2"/>
 
                   <div>
@@ -135,7 +141,7 @@
                 <input type="text" name="steps[0].content" placeholder="조리내용을 적어보세요!" class="form-control mb-2"/>
 
 				<!-- STEP 이미지 업로드 input 추가 -->
-				<input type="file" name="file" class="form-control mb-2" />
+				<input type="file" name="stepFiles[0]" class="form-control mb-2" />
 				
                 <div>
                   <ul id="file"></ul>
@@ -212,7 +218,7 @@
                   <button id="delete_tip" type="button" class="btn btn-outline-primary" onclick="addTip(this)">-</button>
                 </div>
               </div>
-            </template> 
+            </template>
         </fieldset>
 
         <div class="text-end mb-3">
@@ -230,4 +236,5 @@
   <script src="${pageContext.request.contextPath}/resources/js/upload.js"></script>
 <jsp:include page="../include/footer.jsp" />
 </body>
+
 </html>

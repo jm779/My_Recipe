@@ -24,10 +24,11 @@ window.addEventListener("load", () => {
                 img.style.top = "0";
                 img.style.left = "0";
                 img.style.width = "100%";
-                img.style.height = "100%";
-                img.style.objectFit = "cover";
+                img.style.height = "auto";
+                img.style.objectFit = "contain";
                 img.style.cursor = "pointer";
                 img.style.zIndex = "1";
+
 
                 img.addEventListener("click", () => {
                     uploadBtn.click();

@@ -6,7 +6,6 @@
   <title>요리 상세 보기</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-
 <!-- 푸터고정 -->
 <body class="d-flex flex-column min-vh-100">
 
@@ -33,17 +32,14 @@
           <label class="form-label"><strong>레시피 소개</strong></label>
           <input type="text" class="form-control" value="${item.comment}" readonly />
         </div>
-
-		<div style="width: 450px; height: 250px; background-color: #e0e0e0; 
-        		margin-bottom: 10px; ">
-        	<div class="d-flex" style="width: 110px; height: 35px; 
-        			background-color: gray; justify-content: center; padding-top: 5px; margin-bottom: 60px;">
-        		<img src="${pageContext.request.contextPath}${item.mainimagepath}" alt="camera_icon" 
-        			style="width: 20px; height: 20px; margin-top: 2px;"><p style="color: #ffff; margin-left: 7px;">대표사진</p>  		
-        	</div>
-        	<button type="button" style="width:50px; height:50px; 
-        		border-radius: 40px; margin-left: 195px;"><p style="font-size: 30px;">+</p></button>
-        </div>
+        
+		<div class="mb-3">	
+			<label class="form-label"><strong>대표사진</strong></label>				
+			<div style="width: 450px; height: 250px; background-color: #e0e0e0; margin-bottom: 10px; overflow:hidden;">
+	        	<img src="${pageContext.request.contextPath}${item.mainimagepath}" alt="camera_icon"
+	        			style="width: 100%; height: 100%; margin-top: 2px; object-fit: cover;">
+	        </div>
+	    </div>    
 
         <div class="mb-3">
           <label class="form-label"><strong>레시피 동영상 링크</strong></label>
@@ -88,6 +84,7 @@
     <div class="d-flex justify-content-center gap-3 my-4">
   	<!-- 추천 레시피 등록 버튼 -->
 	  <form action="/cook/recommend" method="post">
+	  	<input type="hidden" name="recipenum" value="${item.recipeid}" />
 	    <button type="submit" class="btn btn-outline-danger d-flex align-items-center px-3">
 	      <img src="${pageContext.request.contextPath}/resources/image/recommend_enroll.png" alt="recommend"
 	           style="width: 20px; height: 20px; margin-right: 8px;">

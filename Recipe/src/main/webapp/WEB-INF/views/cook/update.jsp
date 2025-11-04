@@ -9,6 +9,7 @@
   <script src="${pageContext.request.contextPath}/resources/js/main_img.js"></script>
   <script src="${pageContext.request.contextPath}/resources/js/step_add.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  
 </head>
 
 <!-- 푸터고정 -->
@@ -39,36 +40,31 @@
         </div>
 
 		<!-- 대표사진 -->
-		<div id="main_img_container" style="width: 450px; height: 250px; background-color: #e0e0e0; margin-bottom: 10px; position: relative; overflow: hidden;">	  
-		  
-		  <c:if test="${not empty item.mainimagepath}">
-    		<img src="${pageContext.request.contextPath}${item.mainimagepath}" class="preview"
-         		style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; cursor: pointer;" />
-  		  </c:if>
-		  
-		  <input type="file" name="mainfile" id="mainfile" style="display: none;" />
-		  
-		  <!-- 안내 문구 (이미지 아래) -->
-		  <div id="img_change" style="position: absolute; bottom: 10px; right: 25px; margin-bottom: 30px;
-		  		color: #555; font-size: 14px; z-index: 0;">
-		    	이미지를 선택 후 재클릭 시, 다른 이미지로 변경이 가능합니다.
-		  </div>
-		  <!-- 대표사진 업로드 버튼 -->
-		  <button id="main_img" type="button" style="width:50px; height:50px; border-radius: 40px; position: absolute; top: 35%; left: 43%; z-index: 2;">
-		    <p style="font-size: 32px; padding-bottom: 10px;">+</p>
-		  </button>
-		  <!-- 재선택 버튼 (초기에는 숨김) -->
-		  <button id="reselect_img" type="button" style="position: absolute; bottom: 10px; right: 10px; z-index: 3; display: none;" class="btn btn-sm btn-light">
-		    사진 다시 선택                
-		  </button>	
-		  <!-- 대표사진 안내텍스트 -->
-		  <div class="d-flex" style="width: 110px; height: 35px; position: absolute; top: 10px; left: 10px; background-color: gray; justify-content: center; padding-top: 5px; z-index: 4;">
-		    <img src="${pageContext.request.contextPath}/resources/image/camera.png" alt="camera_icon" 
-		      style="width: 20px; height: 20px; margin-top: 2px;">
-		    <p style="color: #fff; margin-left: 7px;">대표사진</p>          
-		  </div>
+		<div class="mb-3">
+			<label><strong>대표사진</strong></label>
+			<div id="main_img_container" class="img_box" style="width: 450px; height: 250px; background-color: #e0e0e0; margin-bottom: 10px; position: relative; overflow: hidden;">	  
+			  <c:if test="${not empty item.mainimagepath}">
+	    		<img src="${pageContext.request.contextPath}${item.mainimagepath}" class="preview"
+	         		style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; cursor: pointer;" />
+	  		  </c:if>
+			  <input type="file" name="mainfile" id="mainfile" style="display: none;" />
+			  <!-- 대표사진 업로드 버튼 -->
+			  <button id="main_img" type="button" style="width:50px; height:50px; border-radius: 40px; position: absolute; top: 35%; left: 43%; z-index: 2;">
+			    <p style="font-size: 32px; padding-bottom: 10px;"></p>
+			  </button>
+			  <!-- 재선택 버튼 (초기에는 숨김) -->
+			  <button id="reselect_img" type="button" style="position: absolute; bottom: 10px; right: 10px; z-index: 3; display: none;" class="btn btn-sm btn-light">
+			    사진 다시 선택                
+			  </button>	
+			  <!-- 대표사진 안내텍스트 -->
+			  <div class="d-flex" style="width: 110px; height: 35px; position: absolute; top: 10px; left: 10px; background-color: gray; justify-content: center; padding-top: 5px; z-index: 4;">
+			    <img src="${pageContext.request.contextPath}/resources/image/camera.png" alt="camera_icon" 
+			      style="width: 20px; height: 20px; margin-top: 2px;">
+			    <p style="color: #fff; margin-left: 7px;">대표사진</p>          
+			  </div>
+			</div>
 		</div>
-
+		
         <div class="mb-3">
           <label for="cook-url" class="form-label"><strong>레시피 동영상 링크</strong></label>
           <input type="url" id="cook-url" name="link" class="form-control" value="${item.link}" />
