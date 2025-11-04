@@ -2,7 +2,9 @@ package kr.ac.kopo.recipe.controller;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -121,7 +123,7 @@ public class CookController {
 		item.setRecipeid(recipeid);
 		
 		//대표사진 이미지
-		if (file != null && !mainfile.isEmpty()) {
+		if (mainfile != null && !mainfile.isEmpty()) {
             String mainFileName = UUID.randomUUID().toString() + "_" + mainfile.getOriginalFilename();
             File mainImg = new File(uploadPath, mainFileName);
 
@@ -219,16 +221,24 @@ public class CookController {
 	}
 	
 	
-	@PostMapping("/cook/recommend")
-	public String recommend(@PathVariable int recipeid, HttpSession session) {
-		Member loginMember = (Member) session.getAttribute("member");
-		if (loginMember == null) {
-			return "redirect:/login";
+	@PostMapping("/recommend")
+	public String recommend(@RequestParam("recommendnum") int recommendnum, 
+							@RequestParam("recommendnum") String userid,
+							HttpSession session) {
+		Member member = (Member) session.getAttribute("member");
+		
+		if(member == null) {
+			return "redirect://member/login";
 		}
 		
-		cookService.recommend(recipeid, loginMember.getUserid());
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("recommendnum", recommendnum);
+		param.put("userid", userid );
+		
+		cookService.recommend(param);
+		
 		return "redirect:/";
-
+		
 	}
 
 }

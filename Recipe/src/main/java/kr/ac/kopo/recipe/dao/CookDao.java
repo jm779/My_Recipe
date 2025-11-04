@@ -1,6 +1,7 @@
 package kr.ac.kopo.recipe.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import kr.ac.kopo.recipe.model.Cook;
 import kr.ac.kopo.recipe.model.Step;
@@ -25,7 +26,7 @@ public interface CookDao {
 	
 	List<Cook> getRecommended();
 
-	void recommend(int recipeid, String userid);
+	void recommend(Map<String, Object> param);
 
 
 }

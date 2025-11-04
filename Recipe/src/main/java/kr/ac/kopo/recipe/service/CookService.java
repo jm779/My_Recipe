@@ -1,10 +1,10 @@
 package kr.ac.kopo.recipe.service;
 
 import java.util.List;
+import java.util.Map;
 
 import kr.ac.kopo.recipe.model.Cook;
 import kr.ac.kopo.recipe.model.Step;
-import kr.ac.kopo.recipe.pager.Pager;
 
 public interface CookService{
 	
@@ -24,6 +24,6 @@ public interface CookService{
 
 	List<Cook> getAllRecommended();
 
-	void recommend(int recipeid, String userid);
+	void recommend(Map<String, Object> param);
 	
 }

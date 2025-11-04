@@ -1,10 +1,10 @@
 package kr.ac.kopo.recipe.service;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -116,10 +116,13 @@ public class CookServiceImpl implements CookService {
 	}
 
 	@Override
-	public void recommend(int recipeid, String userid) {
-		cookDao.recommend(recipeid, userid);
+	public void recommend(Map<String, Object> param) {
+		/*
+		 * int recipenum = (int)param.get("recipenum"); String userid =
+		 * (String)param.get("userid");
+		 */
+		param.put("writedate", new Date());
+		
+		cookDao.recommend(param);
 	}
-	
-	
-
 }

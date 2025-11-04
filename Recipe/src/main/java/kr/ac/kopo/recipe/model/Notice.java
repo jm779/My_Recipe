@@ -1,36 +1,37 @@
 package kr.ac.kopo.recipe.model;
 
-import java.util.List;
+import java.util.Date;
 
 public class Notice {
-	private String noticeid;                               
-	private String noticename;
-	private String writer;
-	private String date;
+	private int noticeid;                               
+	private String ntitle;
+	private String nwriter;
+	private Date ndate;
 	
-	public String getNoticeid() {
+	public int getNoticeid() {
 		return noticeid;
 	}
-	public void setNoticeid(String noticeid) {
+	public void setNoticeid(int noticeid) {
 		this.noticeid = noticeid;
 	}
-	public String getNoticename() {
-		return noticename;
+	public String getNtitle() {
+		return ntitle;
 	}
-	public void setNoticename(String noticename) {
-		this.noticename = noticename;
+	public void setNtitle(String ntitle) {
+		this.ntitle = ntitle;
 	}
-	public String getWriter() {
-		return writer;
+	public String getNwriter() {
+		return nwriter;
 	}
-	public void setWriter(String writer) {
-		this.writer = writer;
+	public void setNwriter(String nwriter) {
+		this.nwriter = nwriter;
 	}
-	public String getDate() {
-		return date;
+	public Date getNdate() {
+		return ndate;
 	}
-	public void setDate(String date) {
-		this.date = date;
+	public void setNdate(Date ndate) {
+		this.ndate = ndate;
 	}
-
+	
+	
 }
