@@ -8,4 +8,12 @@ public interface NoticeDao {
 
 	List<Notice> list();
 
+	void insert(Notice notice);
+
+	Notice get(int id);
+
+	void update(Notice notice);
+
+	void delete(int id);
+
 }

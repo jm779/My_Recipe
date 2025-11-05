@@ -20,4 +20,24 @@ public class NoticeDaoImpl implements NoticeDao{
 		
 	}
 
+	@Override
+	public void insert(Notice notice) {
+		sql.insert("insert", notice);
+	}
+
+	@Override
+	public Notice get(int noticeid) {
+		return sql.selectOne("get", noticeid);
+	}
+
+	@Override
+	public void update(Notice notice) {
+		sql.update("update", notice);
+	}
+
+	@Override
+	public void delete(int noticeid) {
+		sql.delete("delete", noticeid);
+	}
+
 }

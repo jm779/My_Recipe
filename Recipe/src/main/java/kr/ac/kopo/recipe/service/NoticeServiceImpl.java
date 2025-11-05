@@ -18,6 +18,26 @@ public class NoticeServiceImpl implements NoticeService{
 	public List<Notice> getAll(){
 		return noticeDao.list();
 	}
+
+	@Override
+	public void save(Notice notice) {
+		noticeDao.insert(notice);
+	}
+
+	@Override
+	public Notice getById(int noticeid) {
+		return noticeDao.get(noticeid);
+	}
+
+	@Override
+	public void update(Notice notice) {
+		noticeDao.update(notice);
+	}
+
+	@Override
+	public void delete(int noticeid) {
+		noticeDao.delete(noticeid);
+	}
 	
 	
 }

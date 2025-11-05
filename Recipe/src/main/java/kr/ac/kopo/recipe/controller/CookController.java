@@ -2,6 +2,7 @@ package kr.ac.kopo.recipe.controller;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -222,18 +223,15 @@ public class CookController {
 	
 	
 	@PostMapping("/recommend")
-	public String recommend(@RequestParam("recommendnum") int recommendnum, 
-							@RequestParam("recommendnum") String userid,
-							HttpSession session) {
-		Member member = (Member) session.getAttribute("member");
-		
+	public String recommend(@RequestParam("userid")String userid, HttpSession session) {
+		Member member = (Member) session.getAttribute("member");	
 		if(member == null) {
 			return "redirect://member/login";
 		}
 		
 		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("recommendnum", recommendnum);
-		param.put("userid", userid );
+		param.put("userid", userid);
+		param.put("writerdate", new Date());
 		
 		cookService.recommend(param);
 		

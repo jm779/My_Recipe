@@ -5,7 +5,7 @@ import java.util.Date;
 public class Notice {
 	private int noticeid;                               
 	private String ntitle;
-	private String nwriter;
+	private String userid;
 	private Date ndate;
 	
 	public int getNoticeid() {
@@ -20,11 +20,11 @@ public class Notice {
 	public void setNtitle(String ntitle) {
 		this.ntitle = ntitle;
 	}
-	public String getNwriter() {
-		return nwriter;
+	public String getUserid() {
+		return userid;
 	}
-	public void setNwriter(String nwriter) {
-		this.nwriter = nwriter;
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 	public Date getNdate() {
 		return ndate;
