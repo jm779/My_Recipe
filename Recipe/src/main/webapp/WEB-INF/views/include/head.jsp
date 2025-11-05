@@ -9,6 +9,7 @@
           <img src="${pageContext.request.contextPath}/resources/image/logo.png" alt="logo" style="height:50px;">
         </a>
         <h2 class="mb-0">RecipeTime</h2>
+        <script src="${pageContext.request.contextPath}/resources/js/mypage_move.js"></script>
       </div>
 
       <form action="search" method="get" class="d-flex gap-2">
@@ -31,11 +32,11 @@
               <div style="position: relative;">
                 <a href="/logout">로그아웃</a> |
                 <a href="${pageContext.request.contextPath}/cook/add">레시피 등록</a> |
-                <a href="${pageContext.request.contextPath}/member/mypage">마이페이지</a>
+                <a id="mp_move" href="${pageContext.request.contextPath}/member/mypage">마이페이지</a>
                 <div id="choose_help" style="width:79px; height:72px; position: absolute; 
                 		left:70%; top: 90%; background-color: #e0e0e0; text-align: center; display: none;">
-                	<a href="member/mypage">내 작성글</a>
-                	<a href="question/memberqlist">문의</a>
+                	<a href="${pageContext.request.contextPath}/member/mypage">내 작성글</a>
+                	<a href="${pageContext.request.contextPath}/question/memberqlist">문의</a>
                 </div>
               </div>
             </div>

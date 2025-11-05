@@ -6,6 +6,7 @@ window.addEventListener("load", () => {
     const input = document.getElementById("mainfile");
 
     function triggerUpload(){
+        input.value = "";
         input.click();
     }
     

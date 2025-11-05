@@ -77,7 +77,8 @@
           <c:forEach var="step" items="${steps}" varStatus="status">
             <div class="step border p-3 mb-3">
               <h5>STEP ${status.index + 1}</h5>
-              <button type="button" class="btn btn-danger btn-sm mb-2" onclick="removeBtn(this)">-</button>
+              <button type="button" class="btn btn-danger btn-sm mb-2 step_del_Btn">
+	                  	 -</button>
 
               <input type="text" name="steps[${status.index}].content" class="form-control mb-2" value="${step.content}" placeholder="조리내용을 적어보세요!" />
               <input type="hidden" name="steps[${status.index}].imagepath" value="${step.imagepath}" />
@@ -91,14 +92,14 @@
 
               <div class="mb-2">
                 <label><strong>재료</strong></label>
-                <div id="ingre_input" class="gap-2">
+                <div class="ingre_input gap-2">
                   <input type="text" name="steps[${status.index}].ingredient" class="form-control" value="${step.ingredient}" placeholder="재료" />
                 </div>
                 <button id="add_ingre" type="button" class="btn btn-outline-primary">+</button>
                 <button id="delete_ingre" type="button" class="btn btn-outline-primary">-</button>
               </div>
 
-              <div id="tools_input" class="mb-2">
+              <div class="tools_input mb-2">
                 <label><strong>도구</strong></label>
                 <div class="gap-2">
                   <input type="text" name="steps[${status.index}].tools" class="form-control" value="${step.tools}" placeholder="도구" />
@@ -109,7 +110,7 @@
 
               <div>
                 <label><strong>팁</strong></label>
-                <div id="tip_input" class="gap-2">
+                <div class="tip_input gap-2">
                   <input type="text" name="steps[${status.index}].tip" class="form-control" value="${step.tip}" placeholder="팁" />
                 </div>
                 <button id="add_tip" type="button" class="btn btn-outline-primary" onclick="addTip(this)">+</button>
@@ -118,6 +119,55 @@
             </div>
           </c:forEach>
         </fieldset>
+         <!-- step 추가 시, 추가 될 step -->
+		  <template id="step-template">
+			  <div class="step border p-3 mb-3">
+			    <h5 class="step-title">STEP</h5>
+			    <button type="button" class="btn btn-danger btn-sm mb-2" onclick="removeBtn(this)">-</button>
+			
+			    <!-- 조리 내용 -->
+			    <input type="text" name="steps[].content" placeholder="조리내용을 적어보세요!" class="step-content form-control mb-2" />
+			
+			    <!-- 이미지 영역 -->
+			    <div>
+			      <ul class="file-list"></ul>
+			      <button type="button" class="photo_btn">이미지 추가</button>
+			      <button type="button" class="btn btn-danger btn-sm mb-2">-</button>
+			    </div>
+			
+			    <!-- 재료 -->
+			    <div class="mb-2">
+			      <label><strong>재료</strong></label>
+			      <div class="ingre-input row gap-2">
+			        <input type="text" name="steps[].ingredient" placeholder="재료" class="step-ingredient form-control" />
+			      </div>
+			      <button type="button" class="btn btn-outline-primary">+</button>
+			      <button type="button" class="btn btn-outline-primary">-</button>
+			    </div>
+			
+			    <!-- 도구 -->
+			    <div class="mb-2">
+			      <label><strong>도구</strong></label>
+			      <div class="tools-input row gap-2">
+			        <input type="text" name="steps[].tools" placeholder="도구" class="step-tools form-control" />
+			      </div>
+			      <button type="button" class="btn btn-outline-primary" onclick="addTools(this)">+</button>
+			      <button type="button" class="btn btn-outline-primary" onclick="addTools(this)">-</button>
+			    </div>
+			
+			    <!-- 팁 -->
+			    <div>
+			      <label><strong>팁</strong></label>
+			      <div class="tip-input row gap-2">
+			        <input type="text" name="steps[].tip" placeholder="팁" class="step-tip form-control" />
+			      </div>
+			      <button type="button" class="btn btn-outline-primary" onclick="addTip(this)">+</button>
+			      <button type="button" class="btn btn-outline-primary" onclick="addTip(this)">-</button>
+			    </div>
+			  </div>
+		</template>
+
+        
 
         <div class="text-end mb-3">
           <button type="button" id="add_step_btn" class="btn btn-secondary">STEP 추가</button>

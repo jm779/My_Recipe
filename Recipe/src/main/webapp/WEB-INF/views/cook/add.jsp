@@ -41,9 +41,11 @@
     	<!-- 대표사진 -->
     	<div class="mb-3">
     		<label class="form-label">대표사진</label>
-			<div class="img_box">
-				<img src="${pageContext.request.contextPath}${item.mainimagepath}" alt="대표사진" />
-			</div>	    	
+    			<c:if test="${not empty item.mainimagepath}">
+	    			<div class="img_box">
+						<img src="${pageContext.request.contextPath}${item.mainimagepath}" alt="대표사진" />
+					</div>
+    			</c:if>
     	</div>
     	
 		<div id="main_img_container" style="width: 450px; height: 250px; background-color: #e0e0e0; margin-bottom: 10px; position: relative; overflow: hidden;">	  
@@ -85,10 +87,9 @@
             <c:when test="${not empty cook.steps}">
               <c:forEach var="step" items="${cook.steps}" varStatus="status">
                 <div class="step border p-3 mb-3">
-                	<h5>STEP ${status.index + 1}</h5>
+                	<h5 class="step-title">STEP ${status.index + 1}</h5>
                   	<div class="d-flex">
-                  	
-	                  	<button type="button" class="btn btn-danger btn-sm mb-2" onclick="removeBtn(this)">
+	                  	<button type="button" class="btn btn-danger btn-sm mb-2 step_del_Btn">
 	                  	 -</button>
                   	</div>	
                   <input type="text" name="steps[${status.index}].content" placeholder="조리내용을 적어보세요!" class="form-control mb-2"/>
@@ -141,7 +142,7 @@
                 <input type="text" name="steps[0].content" placeholder="조리내용을 적어보세요!" class="form-control mb-2"/>
 
 				<!-- STEP 이미지 업로드 input 추가 -->
-				<input type="file" name="stepFiles[0]" class="form-control mb-2" />
+				<input type="file" name="stepFiles[]" class="form-control mb-2" />
 				
                 <div>
                   <ul id="file"></ul>
@@ -152,7 +153,7 @@
                 <div class="mb-2">
                   <label><strong>재료</strong></label>
                   <div id="ingre_input" class="gap-2">
-                    <input type="text" name="steps[0].ingredient" placeholder="재료" class="form-control" />
+                    <input type="text" name="steps[].ingredient" placeholder="재료" class="form-control" />
                   </div>
                   <button id="add_ingre" type="button" class="btn btn-outline-primary">+</button>
                   <button id="delete_ingre" type="button" class="btn btn-outline-primary">-</button>
@@ -161,7 +162,7 @@
                 <div class="mb-2">
                   <label><strong>도구</strong></label>
                   <div id="tools_input" class="gap-2">
-                    <input type="text" name="steps[0].tools" placeholder="도구" class="form-control" />
+                    <input type="text" name="steps[].tools" placeholder="도구" class="form-control" />
                   </div>
                   <button id="add_tools" type="button" class="btn btn-outline-primary" onclick="addTools(this)">+</button>
                   <button id="delete_tools" type="button" class="btn btn-outline-primary" onclick="addTools(this)">-</button>
@@ -170,7 +171,7 @@
                 <div>
                   <label><strong>팁</strong></label>
                   <div id="tip_input" class="gap-2">
-                    <input type="text" name="steps[0].tip" placeholder="팁" class="form-control" />
+                    <input type="text" name="steps[].tip" placeholder="팁" class="form-control" />
                   </div>
                   <button id="add_tip" type="button" class="btn btn-outline-primary" onclick="addTip(this)">+</button>
                   <button id="delete_tip" type="button" class="btn btn-outline-primary" onclick="addTip(this)">-</button>
@@ -178,47 +179,54 @@
               </div>
             </c:otherwise>      
           </c:choose>
-              <!-- step 추가 시, 추가 될 step -->
-            <template id="step-template">
-            	<div class="step border p-3 mb-3">
-                <h5 class="step-title">STEP</h5>
-                <button type="button" class="btn btn-danger btn-sm mb-2" onclick="removeBtn(this)">-</button>
-                <input type="text" name="steps[0].content" placeholder="조리내용을 적어보세요!" class="form-control mb-2"/>
+         <!-- step 추가 시, 추가 될 step -->
+		  <template id="step-template">
+			  <div class="step border p-3 mb-3">
+			    <h5 class="step-title">STEP</h5>
+			    <button type="button" class="btn btn-danger btn-sm mb-2" onclick="removeBtn(this)">-</button>
+			
+			    <!-- 조리 내용 -->
+			    <input type="text" name="steps[].content" placeholder="조리내용을 적어보세요!" class="step-content form-control mb-2" />
+			
+			    <!-- 이미지 영역 -->
+			    <div>
+			      <ul class="file-list"></ul>
+			      <button type="button" class="photo_btn">이미지 추가</button>
+			      <button type="button" class="btn btn-danger btn-sm mb-2">-</button>
+			    </div>
+			
+			    <!-- 재료 -->
+			    <div class="mb-2">
+			      <label><strong>재료</strong></label>
+			      <div class="ingre-input row gap-2">
+			        <input type="text" name="steps[].ingredient" placeholder="재료" class="step-ingredient form-control" />
+			      </div>
+			      <button type="button" class="btn btn-outline-primary">+</button>
+			      <button type="button" class="btn btn-outline-primary">-</button>
+			    </div>
+			
+			    <!-- 도구 -->
+			    <div class="mb-2">
+			      <label><strong>도구</strong></label>
+			      <div class="tools-input row gap-2">
+			        <input type="text" name="steps[].tools" placeholder="도구" class="step-tools form-control" />
+			      </div>
+			      <button type="button" class="btn btn-outline-primary" onclick="addTools(this)">+</button>
+			      <button type="button" class="btn btn-outline-primary" onclick="addTools(this)">-</button>
+			    </div>
+			
+			    <!-- 팁 -->
+			    <div>
+			      <label><strong>팁</strong></label>
+			      <div class="tip-input row gap-2">
+			        <input type="text" name="steps[].tip" placeholder="팁" class="step-tip form-control" />
+			      </div>
+			      <button type="button" class="btn btn-outline-primary" onclick="addTip(this)">+</button>
+			      <button type="button" class="btn btn-outline-primary" onclick="addTip(this)">-</button>
+			    </div>
+			  </div>
+		</template>
 
-                <div>
-                  <ul id="file"></ul>
-                  <button type="button" class="photo_btn">이미지 추가</button>
-                  <button id="delete_img" type="button" class="btn btn-danger btn-sm mb-2">-</button>
-                </div>
-
-                <div class="mb-2">
-                  <label><strong>재료</strong></label>
-                  <div id="ingre_input" class="row gap-2">
-                    <input type="text" name="steps[0].ingredient" placeholder="재료" class="form-control" />
-                  </div>
-                  <button id="add_ingre" type="button" class="btn btn-outline-primary">+</button>
-                  <button id="delete_ingre" type="button" class="btn btn-outline-primary">-</button>
-                </div>
-
-                <div class="mb-2">
-                  <label><strong>도구</strong></label>
-                  <div id="tools_input" class="row gap-2">
-                    <input type="text" name="steps[0].tools" placeholder="도구" class="form-control" />
-                  </div>
-                  <button id="add_tools" type="button" class="btn btn-outline-primary" onclick="addTools(this)">+</button>
-                  <button id="delete_tools" type="button" class="btn btn-outline-primary" onclick="addTools(this)">-</button>
-                </div>
-
-                <div>
-                  <label><strong>팁</strong></label>
-                  <div id="tip_input" class="row gap-2">
-                    <input type="text" name="steps[0].tip" placeholder="팁" class="form-control" />
-                  </div>
-                  <button id="add_tip" type="button" class="btn btn-outline-primary" onclick="addTip(this)">+</button>
-                  <button id="delete_tip" type="button" class="btn btn-outline-primary" onclick="addTip(this)">-</button>
-                </div>
-              </div>
-            </template>
         </fieldset>
 
         <div class="text-end mb-3">

@@ -71,54 +71,6 @@
           <div class="page-item"><a href="?page=${pager.last}${pager.query}" class="page-link">마지막</a></div>
         </div>
       </div>
-      
-      <div class="container my-2">
-	      <div class="mt-4 mb-3"><h3>내 문의 내역</h3></div>
-	
-	      <!-- 문의 목록 테이블 만들기 -->
-	      <table class="table table-sm" border="1">
-	        <thead>
-	          <tr>
-	            <th>문의번호</th>
-	            <th>문의제목</th>
-	            <th>문의내용</th>
-	            <th>작성일</th>
-	          </tr>
-	        </thead>
-	        <tbody>
-	          <c:forEach var="question" items="${qlist}">
-	            <c:if test="${question.userid == userid}">
-	              <tr>
-	                <td>${question.questionid}</td>
-	                <td>${question.qtitle}</td>
-	                <td>${question.qcontent}</td>
-	                <td>${question.qdate}</td>
-	                <td>
-	                  <a href="${pageContext.request.contextPath}/cook/detail/${cook.recipeid}">
-	                    <button type="button">상세</button>
-	                  </a>
-	                </td>
-	                <td>
-	                  <a href="${pageContext.request.contextPath}/cook/update/${cook.recipeid}">
-	                    <button type="button">수정</button>
-	                  </a>
-	                </td>
-	                <td>
-	                  <a href="${pageContext.request.contextPath}/cook/delete/${cook.recipeid}" class="btn-delete">
-	                    <button type="button">삭제</button>
-	                  </a>  
-	                </td>
-	              </tr>
-	            </c:if>
-	          </c:forEach>
-	          <c:if test="${empty qlist}">
-	            <tr>
-	              <td colspan="4">문의 정보가 없습니다.</td>
-	            </tr>
-	          </c:if>
-	        </tbody>
-	      </table>
-    </div>
     </div>
   </main>
 <jsp:include page="../include/footer.jsp" />

@@ -1,7 +1,7 @@
 window.addEventListener("load", () => {
-    const ingreDiv = document.getElementById("ingre_input");
-    const toolsDiv = document.getElementById("tools_input");
-    const tipDiv = document.getElementById("tip_input");
+    const ingreDiv = document.querySelector(".ingre_input");
+    const toolsDiv = document.querySelector(".tools_input");
+    const tipDiv = document.querySelector(".tip_input");
 
     document.getElementById("add_ingre").addEventListener("click", function () {
         const inputCol = document.createElement("div");

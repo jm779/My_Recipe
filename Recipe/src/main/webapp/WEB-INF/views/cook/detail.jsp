@@ -84,7 +84,7 @@
     <div class="d-flex justify-content-center gap-3 my-4">
   	<!-- 추천 레시피 등록 버튼 -->
 	  <form action="/cook/recommend" method="post">
-	  	<input type="hidden" name="recipenum" value="${item.recipeid}" />
+	  	<input type="hidden" name="recommendnum" value="${item.recipeid}" />
 	    <button type="submit" class="btn btn-outline-danger d-flex align-items-center px-3">
 	      <img src="${pageContext.request.contextPath}/resources/image/recommend_enroll.png" alt="recommend"
 	           style="width: 20px; height: 20px; margin-right: 8px;">
