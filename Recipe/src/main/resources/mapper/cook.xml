@@ -91,7 +91,11 @@
 	</select>
 	
 	<insert id="recommend" parameterType="map">
-		INSERT INTO recommend (recommendnum, userid, writedate)
-		VALUES (#{recommendnum}, #{userid}, #{writedate})
+	    <selectKey keyProperty="recommendnum" resultType="int" order="BEFORE">
+	        SELECT recommend_seq.NEXTVAL FROM dual
+	    </selectKey>
+	    INSERT INTO recommend (recommendnum, userid, writedate)
+	    VALUES (#{recommendnum}, #{userid}, #{writedate})
 	</insert>
+
 </mapper>
