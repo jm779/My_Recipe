@@ -9,11 +9,11 @@
 	</settings>
 	
 	<typeAliases>
-		<typeAlias type="kr.ac.kopo.recipe.model.Member" alias="member" />
-		<typeAlias type="kr.ac.kopo.recipe.model.Cook" alias="cook"/>
-		<typeAlias type="kr.ac.kopo.recipe.model.Step" alias="step"/>
-		<typeAlias type="kr.ac.kopo.recipe.model.Notice" alias="notice"/>
-		<typeAlias type="kr.ac.kopo.recipe.model.Question" alias="question"/>
+		<typeAlias type="kr.ac.kopo.recipe.model.Member" alias="Member" />
+		<typeAlias type="kr.ac.kopo.recipe.model.Cook" alias="Cook"/>
+		<typeAlias type="kr.ac.kopo.recipe.model.Step" alias="Step"/>
+		<typeAlias type="kr.ac.kopo.recipe.model.Notice" alias="Notice"/>
+		<typeAlias type="kr.ac.kopo.recipe.model.Question" alias="Question"/>
 	</typeAliases>
 
 	<mappers>

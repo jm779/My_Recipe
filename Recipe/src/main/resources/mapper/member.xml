@@ -18,33 +18,39 @@
 		</where>
 	</sql>
 	
+	<select id="login" resultType="member">
+	   SELECT * FROM member
+	   WHERE userid = #{userid} AND userpassword = #{userpassword}
+	</select>
+	
+	
 	<select id="total" resultType="Integer">
 		SELECT COUNT(*) FROM member
 		<include refid="searchCondition"></include>
 	</select>
 
 	<insert id="add">
-		INSERT INTO member2
+		INSERT INTO member
 		VALUES (#{userid}, #{userpassword}, #{name}, #{email})
 	</insert>
 
 	<select id="list" resultType="member">
-		SELECT * FROM member2
+		SELECT * FROM member
 	</select>
 	
 	<update id="update">
-		UPDATE member2
+		UPDATE member
 		SET password=#{userpassword}, name=#{name}, email=#{email}
 		WHERE userid=#{userid}
 	</update>
 	
 	<delete id="delete">
-		DELETE FROM member2
+		DELETE FROM member
 		WHERE userid=#{userid}
 	</delete>
 	
 	<select id="item" resultType="member">
-		SELECT * FROM member2
+		SELECT * FROM member
 		WHERE userid=#{userid}
 	</select>
 	
