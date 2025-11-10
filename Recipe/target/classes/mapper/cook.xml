@@ -2,74 +2,124 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="cook">
+    <resultMap id="CookResultMap" type="kr.ac.kopo.recipe.model.Cook">
+        <id property="recipeid" column="recipeid" />
+        <result property="recipetitle" column="recipetitle" />
+        <result property="rcomment" column="rcomment" />
+        <result property="link" column="link" />
+        <result property="userid" column="userid" />
+        <result property="mainimagepath" column="mainimagepath" />
+        <result property="recommend" column="recommend" />
+    </resultMap>
 
-	<select id="list" resultType="Cook">
-		SELECT *
-		FROM cook
-	</select>
+    <select id="list" resultType="Cook">
+        SELECT *
+        FROM cook
+        WHERE userid = #{userid}
+        ORDER BY recipeid DESC
+    </select>
 
-	<insert id="addCook" parameterType="Cook">
-		<selectKey keyProperty="recipeid" resultType="int" order="BEFORE">
-			SELECT cook_seq.nextval FROM dual
-		</selectKey>
-		INSERT INTO cook(recipeid, recipetitle, "comment", link, userid)
-		VALUES (#{recipeid}, #{recipetitle}, #{comment}, #{link}, #{userid})
-	</insert>
+    <insert id="addCook" parameterType="Cook">
+        <selectKey keyProperty="recipeid" resultType="int" order="BEFORE">
+            SELECT cook_seq.nextval FROM dual
+        </selectKey>
+        INSERT INTO cook(recipeid, recipetitle, rcomment, link, userid, mainimagepath)
+        VALUES (#{recipeid}, #{recipetitle}, #{rcomment}, #{link}, #{userid}, #{mainimagepath})
+    </insert>
 
-	<insert id="addStep" parameterType="Step">
-		INSERT INTO step(recipeid, step_order, content, ingredient, tools, tip)
-		VALUES (#{recipeid}, #{stepOrder}, #{content}, #{ingredient}, #{tools}, #{tip})
-	</insert>
+    <insert id="addStep" parameterType="Step">
+        INSERT INTO step(recipeid, step_order, content, ingredient, tools, tip, imagepath)
+        VALUES (#{recipeid}, #{stepOrder}, #{content}, #{ingredient}, #{tools}, #{tip}, #{imagepath})
+    </insert>
 
-	<select id="item" resultType="Cook">
-		SELECT *
-		FROM cook
-		WHERE recipeid = #{recipeid}
-	</select>
-	
-	<select id="stepItem" resultType="Step">
-		SELECT *
-		FROM step
-		WHERE recipeid = #{recipeid}
-	</select>
+    <select id="item" resultType="Cook">
+        SELECT *
+        FROM cook
+        WHERE recipeid = #{recipeid}
+    </select>
+    
+    <select id="stepItem" resultType="Step">
+        SELECT *
+        FROM step
+        WHERE recipeid = #{recipeid}
+    </select>
 
-	<update id="update" parameterType="Cook">
-		UPDATE cook
-		SET recipetitle = #{recipetitle},
-		"comment" = #{comment},
-		link = #{link}
-		WHERE recipeid = #{recipeid}
-	</update>
-		
-	<update id="stepUpdate" parameterType="step">
-		UPDATE step
-		SET content= #{content},
-		ingredient = #{ingredient},
-		tools = #{tools},
-		tip = #{tip}
-		WHERE recipeid = #{recipeid}
-	</update>
-	
-	<delete id="delete" parameterType="int">
-		DELETE FROM cook
-		WHERE recipeid = #{recipeid}
-	</delete>
+     <update id="update" parameterType="Cook">
+		  UPDATE cook
+		  SET recipetitle = #{recipetitle},
+		      rcomment = #{rcomment},
+		      link = #{link},
+		      userid = #{userid},
+		      mainimagepath = #{mainimagepath}
+		  WHERE recipeid = #{recipeid}
+  	</update>
 
-	<delete id="stepDelete" parameterType="int">
-		DELETE FROM step
-		WHERE recipeid = #{recipeid}
-	</delete>
 
-	<select id="detail" resultType="Cook">
-		SELECT *
-		FROM cook
-		WHERE recipeid = #{recipeid}
-	</select>
+    <update id="stepUpdate" parameterType="Step">
+        UPDATE step
+        SET content= #{content},
+        ingredient = #{ingredient},
+        tools = #{tools},
+        tip = #{tip},
+        imagepath = #{imagepath}
+        WHERE recipeid = #{recipeid}
+    </update>
+    
+    <delete id="delete" parameterType="int">
+        DELETE FROM cook
+        WHERE recipeid = #{recipeid}
+    </delete>
 
-	<select id="getStepsByRecipeid" resultType="step">
-		SELECT * FROM step
-		WHERE recipeid = #{recipeid}
-		ORDER BY step_order
-	</select>
+    <delete id="stepDelete" parameterType="int">
+        DELETE FROM step
+        WHERE recipeid = #{recipeid}
+    </delete>
 
+    <select id="detail" resultType="Cook">
+        SELECT *
+        FROM cook
+        WHERE recipeid = #{recipeid}
+    </select>
+
+    <select id="getStepsByRecipeid" resultType="Step">
+        SELECT * FROM step
+        WHERE recipeid = #{recipeid}
+        ORDER BY step_order ASC
+    </select>
+    
+    <select id="getRecommended" resultType="Cook">
+        SELECT *
+        FROM cook
+        WHERE recommend = '1'
+    </select>
+    
+    <insert id="recommend" parameterType="map">
+        <selectKey keyProperty="recommendid" resultType="int" order="BEFORE">
+            SELECT recommend_seq.NEXTVAL FROM dual
+        </selectKey>
+        INSERT INTO recommend (recommendid, userid, recipeid, writedate)
+        VALUES (#{recommendid}, #{userid}, #{recipeid}, #{writedate})
+    </insert>
+
+    <select id="getRecommendedByUser" parameterType="string" resultType="Cook">
+        SELECT c.*
+        FROM recommend r
+        JOIN cook c ON r.recipeid = c.recipeid
+        WHERE r.userid = #{userid}
+        ORDER BY r.writedate DESC
+    </select>
+
+    <select id="getAllRecommended" resultType="Cook">
+          SELECT *
+          FROM (
+            SELECT c.*, ROWNUM AS rn
+            FROM (
+              SELECT c.*
+              FROM recommend r
+              JOIN cook c ON r.recipeid = c.recipeid
+              ORDER BY r.writedate DESC
+            ) c
+          )
+          WHERE rn &lt;= 4
+    </select>
 </mapper>
