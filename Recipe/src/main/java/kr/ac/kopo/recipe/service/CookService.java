@@ -10,7 +10,7 @@ public interface CookService{
 	
 	void addCookWithStep(Cook cook, String userid);
 
-	List<Cook> list();
+	List<Cook> list(String userid);
 
 	Cook item(int recipeid);
 
@@ -22,8 +22,10 @@ public interface CookService{
 
 	List<Step> listByRecipeId(int recipeid);
 
-	List<Cook> getAllRecommended();
-
 	void recommend(Map<String, Object> param);
+
+	List<Cook> getAllRecommendedByUser(String userid);
+
+	List<Cook> getAllRecommended();
 	
 }

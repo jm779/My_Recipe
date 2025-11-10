@@ -37,15 +37,17 @@ public class MemberController {
 	     
 	
 	@GetMapping("/mypage")
-	public String mypage(@SessionAttribute Member member, Pager pager, Model model) {
-	    List<Cook> userList = cookService.list();
+	public String mypage(Member member, Pager pager, Model model, HttpSession session) {
+		String userid = (String) session.getAttribute("userid"); 
+	    List<Cook> userList = cookService.list(userid);
+	    pager.setPerPage(6);
 
-	    // 페이징 계산
+	    // �럹�씠吏� 怨꾩궛
 	    int total = userList.size();
 	    pager.setTotal(total);
 
 	    int start = (pager.getPage() - 1) * pager.getPerPage();
-	    int end = start + pager.getPerPage;
+	    int end = start + pager.getPerPage();
 	    if (end > total) {
 	        end = total;
 	    }
@@ -55,7 +57,6 @@ public class MemberController {
 	        pagedList.add(userList.get(i));
 	    }
 
-	    model.addAttribute("userList", userList);
 	    model.addAttribute("pagedList", pagedList);
 	    model.addAttribute("pager", pager);
 	    model.addAttribute("userid", member.getUserid());
@@ -86,19 +87,20 @@ public class MemberController {
 	@GetMapping("/update/{recipeid}")
 	public String update(@PathVariable int recipeid, Model model) {
 		Cook cookItem = memberService.item(recipeid);
-		Step stepItem = memberService.getStepByRecipeid(recipeid);
+		List<Step> stepList = memberService.listStepsByRecipeid(recipeid);;
 		
-		//Member item = memberService.item(recipeid);
-		model.addAttribute("item", cookItem);
-		model.addAttribute("item", stepItem);
+		model.addAttribute("cookItem", cookItem);  // 요리 정보
+	    model.addAttribute("stepItem", stepList);  // 단계 정보
 		
 		return "/cook/update";
 	}
 	
 	@PostMapping("/update/{recipeid}")
-	public String update(@PathVariable int recipeid, Cook item, Step step) {
+	public String update(@PathVariable int recipeid, Cook item, Step step, @SessionAttribute Member member) {
 		item.setRecipeid(recipeid);
 		step.setRecipeid(recipeid);
+		step.setUserid(member.getUserid()); 
+		
 		memberService.update(item, step);
 		
 		return "redirect:/cook/list" + recipeid;

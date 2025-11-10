@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class Question {
 	private int questionid;
-	private String qtitile;
+	private String qtitle;
 	private String userid;
 	private String qcontent;
 	private LocalDate qdate;
@@ -13,12 +13,12 @@ public class Question {
 		return questionid;
 	}
 	
-	public String getQtitile() {
-		return qtitile;
+	public String getQtitle() {
+		return qtitle;
 	}
 
-	public void setQtitile(String qtitile) {
-		this.qtitile = qtitile;
+	public void setQtitle(String qtitle) {
+		this.qtitle = qtitle;
 	}
 
 	public void setQuestionid(int questionid) {

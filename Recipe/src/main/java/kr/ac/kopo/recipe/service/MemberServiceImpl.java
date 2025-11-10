@@ -88,4 +88,9 @@ public class MemberServiceImpl implements MemberService {
 		return false;
 	}
 
+	@Override
+	public List<Step> listStepsByRecipeid(int recipeid) {
+		return null;
+	}
+
 }

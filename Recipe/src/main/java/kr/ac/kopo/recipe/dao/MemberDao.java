@@ -10,6 +10,8 @@ import kr.ac.kopo.recipe.pager.Pager;
 public interface MemberDao {
 	
     void add(Member item);
+    
+    Member login(Member member);
 
     Member item(String userid);
 
@@ -31,4 +33,3 @@ public interface MemberDao {
 	
 	
 }
-

@@ -12,7 +12,7 @@ public interface CookDao {
 	
 	void addStep(Step step);
 
-	List<Cook> list();
+	List<Cook> list(String userid);
 
 	Cook item(int recipeid);
 
@@ -23,10 +23,12 @@ public interface CookDao {
 	Cook detail(int recipeid);
 
 	List<Step> getStepsByRecipeid(int recipeid);
-	
-	List<Cook> getRecommended();
 
 	void recommend(Map<String, Object> param);
+
+	List<Cook> getRecommendedByUser(String userid);
+
+	List<Cook> getAllRecommended();
 
 
 }

@@ -26,8 +26,8 @@ public class CookDaoImpl implements CookDao {
 	}
 
 	@Override
-	public List<Cook> list() {
-		return sql.selectList("cook.list");
+	public List<Cook> list(String userid) {
+		return sql.selectList("cook.list", userid);
 	}
 
 	@Override
@@ -55,14 +55,20 @@ public class CookDaoImpl implements CookDao {
 		return sql.selectList("cook.getStepsByRecipeid", recipeid);
 	}
 
-	@Override
-	public List<Cook> getRecommended() {
-		return sql.selectList("cook.getRecommended");
-	}
 
 	@Override
 	public void recommend(Map<String, Object> param) {
 		sql.insert("cook.recommend", param);	
+	}
+
+	@Override
+	public List<Cook> getRecommendedByUser(String userid) {
+		return sql.selectList("cook.getRecommendedByUser",userid);
+	}
+
+	@Override
+	public List<Cook> getAllRecommended() {
+		return sql.selectList("cook.getAllRecommended");
 	}
 
 	

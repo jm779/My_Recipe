@@ -35,18 +35,29 @@ public class RootController {
 	private NoticeService noticeService;
 	
 	@GetMapping("/")
-	String index(Model model, HttpSession session) {
-		Member loginMember = (Member) session.getAttribute("member");
-		
-		List<Cook> hotList = cookService.getAllRecommended();
-		List<Notice> noticeList = noticeService.getAll();
-		
-		model.addAttribute("hotList",hotList);
-		model.addAttribute("noticeList",noticeList);
-		model.addAttribute("loginMember",loginMember);
-		
-		return "index";
+	public String index(Model model, HttpSession session) {
+	    Member loginMember = (Member) session.getAttribute("member");
+
+	    // 로그인한 사용자 추천 레시피
+	    if (loginMember != null) {
+	        List<Cook> recommendedList = cookService.getAllRecommendedByUser(loginMember.getUserid());
+	        model.addAttribute("recommendedList", recommendedList);
+	    }
+
+	    // 전체 추천 레시피 (인기 추천)
+	    List<Cook> hotList = cookService.getAllRecommended();
+	    model.addAttribute("hotList", hotList);
+
+	    // 공지사항
+	    List<Notice> noticeList = noticeService.getAll();
+	    model.addAttribute("noticeList", noticeList);
+
+	    // 로그인 사용자 정보
+	    model.addAttribute("loginMember", loginMember);
+
+	    return "index";
 	}
+
 	
 	@GetMapping("/signup")
 	String signup() {
@@ -54,10 +65,10 @@ public class RootController {
 	}
 	
 	@PostMapping("/signup")
-	String signup(Member item) {
-		service.add(item);
-		
-		return "redirect:/";
+	public String signup(Member item, Model model) {
+	    service.add(item);
+	    model.addAttribute("signupSuccess", "회원가입이 완료되었습니다. 로그인 후 사용해주세요.");
+	    return "member/signup";
 	}
 	
 	@GetMapping("/login")
@@ -75,8 +86,7 @@ public class RootController {
 			return "redirect:/";
 		}		
 		
-		// 로그인 실패 시
-		model.addAttribute("loginError", "아이디 또는 비밀번호를 잘못입력하셨습니다. 다시 입력해주세요");
+		model.addAttribute("loginError", "아이디 또는 비밀번호를 잘못 입력하셨습니다. 다시 입력해주세요");
 		return "member/login";
 	}
 	
@@ -93,7 +103,7 @@ public class RootController {
 		return "redirect:/cook/add";
 	}
 	
-	//중복확인
+	
 	@ResponseBody
 	@GetMapping("/check_id/{id}")
 	String checkId(@PathVariable String id) {

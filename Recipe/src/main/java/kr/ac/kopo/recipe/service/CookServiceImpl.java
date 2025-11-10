@@ -1,5 +1,6 @@
 package kr.ac.kopo.recipe.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +40,7 @@ public class CookServiceImpl implements CookService {
 			for(Step step : steps) {
 				step.setRecipeid(cook.getRecipeid());
 				step.setStepOrder(order++);
+				step.setUserid(userid);
 				stepDao.add(step);
 			}
 		}
@@ -50,8 +52,8 @@ public class CookServiceImpl implements CookService {
 	}
 
 	@Override
-	public List<Cook> list() {
-		return cookDao.list();
+	public List<Cook> list(String userid) {
+		return cookDao.list(userid);
 	}
 
 	@Override
@@ -74,7 +76,7 @@ public class CookServiceImpl implements CookService {
 		            newStep.setRecipeid(item.getRecipeid());
 		            newStep.setStepOrder(order++);
 
-		            // 기존 이미지 경로 유지
+		            // 湲곗〈 �씠誘몄� 寃쎈줈 �쑀吏�
 		            if ((newStep.getImagepath() == null || newStep.getImagepath().isEmpty()) 
 		                && i < existingSteps.size()) {
 		                newStep.setImagepath(existingSteps.get(i).getImagepath());
@@ -109,11 +111,6 @@ public class CookServiceImpl implements CookService {
 		return stepDao.listByRecipeId(recipeid);
 	}
 
-	
-	@Override
-	public List<Cook> getAllRecommended() {
-		return cookDao.getRecommended();
-	}
 
 	@Override
 	public void recommend(Map<String, Object> param) {
@@ -124,5 +121,18 @@ public class CookServiceImpl implements CookService {
 		param.put("writedate", new Date());
 		
 		cookDao.recommend(param);
+	}
+
+	@Override
+	public List<Cook> getAllRecommendedByUser(String userid) {
+		List<Cook> list = cookDao.getRecommendedByUser(userid);
+	    return list != null ? list : new ArrayList<>();
+		//return cookDao.getRecommendedByUser(userid);
+	}
+
+	@Override
+	public List<Cook> getAllRecommended() {
+		List<Cook> list = cookDao.getAllRecommended();
+	    return list != null ? list : new ArrayList<>();
 	}
 }

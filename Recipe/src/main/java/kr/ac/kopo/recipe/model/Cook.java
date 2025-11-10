@@ -1,13 +1,14 @@
 package kr.ac.kopo.recipe.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Cook {
 	private int recipeid;
 	private String recipetitle;
-	private String comment;
+	private String rcomment;
 	private String link;
-	private List<Step> steps;
+	private List<Step> steps = new ArrayList<>();
 	private String content;
 	private String userid;
 	private String mainimagepath;
@@ -25,11 +26,11 @@ public class Cook {
 	public void setRecipetitle(String recipetitle) {
 		this.recipetitle = recipetitle;
 	}
-	public String getComment() {
-		return comment;
+	public String getRcomment() {
+		return rcomment;
 	}
-	public void setComment(String comment) {
-		this.comment = comment;
+	public void setRcomment(String rcomment) {
+		this.rcomment = rcomment;
 	}
 	public String getLink() {
 		return link;

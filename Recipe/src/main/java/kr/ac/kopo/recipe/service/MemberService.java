@@ -31,5 +31,7 @@ public interface MemberService{
 
 	boolean checkId(String id);
 
+	List<Step> listStepsByRecipeid(int recipeid);
+
 
 }

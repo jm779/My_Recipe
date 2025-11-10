@@ -4,6 +4,7 @@ package kr.ac.kopo.recipe.model;
 public class Step {
 	private int stepid;
 	private int recipeid;
+	private String userid;
 	private int stepOrder;
 	
 	private String content;
@@ -59,6 +60,12 @@ public class Step {
 	}
 	public void setImagepath(String imagepath) {
 		this.imagepath = imagepath;
+	}
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 		
 }

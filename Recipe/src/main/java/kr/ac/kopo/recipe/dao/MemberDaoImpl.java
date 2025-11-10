@@ -25,6 +25,11 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	@Override
+	public Member login(Member member) {
+		return sql.selectOne("member.login", member);
+	}
+	
+	@Override
 	public Member item(String userid) {
 		return sql.selectOne("member.item",userid);
 	}

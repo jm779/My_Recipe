@@ -51,7 +51,7 @@ public class CookController {
 	    String userid = (String) session.getAttribute("userid");
 	    cook.setUserid(userid);
 	   
-		//대표사진 이미지
+		//���몴�궗吏� �씠誘몄�
 		if (mainfile != null && !mainfile.isEmpty()) {
             String mainFileName = UUID.randomUUID().toString() + "_" + mainfile.getOriginalFilename();
             File mainImg = new File(uploadPath, mainFileName);
@@ -93,7 +93,7 @@ public class CookController {
 
 	  @GetMapping("/list") String list(HttpSession session, Model model) { 
 	  String userid = (String) session.getAttribute("userid"); 
-		  List<Cook> list = cookService.list();
+		  List<Cook> list = cookService.list(userid);
 	  
 		  model.addAttribute("list", list); model.addAttribute("userid", userid);
 	  
@@ -108,7 +108,8 @@ public class CookController {
 	public String update(@PathVariable int recipeid, Model model) {
 		Cook item = cookService.item(recipeid);
 		List<Step> steps = cookService.listByRecipeId(recipeid);
-
+		
+		item.setSteps(steps);
 		model.addAttribute("item", item);
 		model.addAttribute("steps", steps);
 
@@ -116,14 +117,15 @@ public class CookController {
 	}
 
 	@PostMapping("/update/{recipeid}")
-	public String update(@PathVariable int recipeid, 
-						 @ModelAttribute Cook item, 
+	public String update(@PathVariable int recipeid,
+						 @ModelAttribute Cook item, HttpSession session,
 						 @RequestParam(value = "mainfile", required = false) MultipartFile mainfile,
 						 @RequestParam(value = "file", required = false) MultipartFile[] file) {
 						 
 		item.setRecipeid(recipeid);
+		String userid = (String) session.getAttribute("userid"); 
 		
-		//대표사진 이미지
+		//���몴�궗吏� �씠誘몄�
 		if (mainfile != null && !mainfile.isEmpty()) {
             String mainFileName = UUID.randomUUID().toString() + "_" + mainfile.getOriginalFilename();
             File mainImg = new File(uploadPath, mainFileName);
@@ -136,7 +138,7 @@ public class CookController {
             }
         }
 
-		//요리순서 이미지
+		//�슂由ъ닚�꽌 �씠誘몄�
 		List<Step> steps = item.getSteps();
 	    if (steps == null) {
 	        steps = new ArrayList<>();
@@ -146,6 +148,7 @@ public class CookController {
 	    for (int i = 0; i < steps.size(); i++) {
             Step step = steps.get(i);
             step.setImagepath("");
+            step.setUserid(userid);
 
             if (file != null && i < file.length && !file[i].isEmpty()) {
                 String fileName = UUID.randomUUID().toString() + "_" + file[i].getOriginalFilename();
@@ -184,7 +187,7 @@ public class CookController {
 		model.addAttribute("item", cookItem);
 		/* model.addAttribute("steps", steps); */
 
-		return "/cook/detail";
+		return "cook/detail";
 	}
 
 	/*
@@ -223,20 +226,22 @@ public class CookController {
 	
 	
 	@PostMapping("/recommend")
-	public String recommend(@RequestParam("userid")String userid, HttpSession session) {
-		Member member = (Member) session.getAttribute("member");	
-		if(member == null) {
-			return "redirect://member/login";
-		}
-		
-		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("userid", userid);
-		param.put("writerdate", new Date());
-		
-		cookService.recommend(param);
-		
-		return "redirect:/";
-		
+	public String recommend(@RequestParam("recipeid") int recipeid, HttpSession session) {
+	    Member member = (Member) session.getAttribute("member");
+	    if (member == null) {
+	        return "redirect:/member/login";
+	    }
+
+	    Map<String, Object> param = new HashMap<>();
+	    param.put("userid", member.getUserid());
+	    param.put("recipeid", recipeid);
+	    param.put("writedate", new Date());
+
+	    cookService.recommend(param);
+
+	    return "redirect:/";
 	}
+	
+
 
 }

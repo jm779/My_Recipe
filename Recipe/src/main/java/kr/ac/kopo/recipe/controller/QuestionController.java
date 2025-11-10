@@ -34,10 +34,10 @@ public class QuestionController {
 		model.addAttribute("list",list);
 		
 		if(userid == null) {
-			// 비회원
+			// 鍮꾪쉶�썝
 			return "question/qlist";
 		} else {
-			// 로그인 사용자
+			// 濡쒓렇�씤 �궗�슜�옄
 			model.addAttribute("userid",userid);
 			return "question/memberqlist";
 		}
@@ -48,10 +48,10 @@ public class QuestionController {
 	        String userid = (String) session.getAttribute("userid");
 	
 	        if (userid == null) {
-	            return "redirect:/login"; // 로그인 페이지로 리디렉션
+	            return "redirect:/login"; // 濡쒓렇�씤 �럹�씠吏�濡� 由щ뵒�젆�뀡
 	        }
 	
-	        return "question/questionadd"; // 등록 폼 JSP
+	        return "question/questionadd"; // �벑濡� �뤌 JSP
 	    }
 	
 	    @PostMapping("/add")
@@ -65,5 +65,10 @@ public class QuestionController {
 	        question.setUserid(userid);
 	        qService.save(question);
 	        return "redirect:/question/qlist";
+	    }
+	    
+	    @GetMapping("/memberqlist")
+	    public String memberqlist() {
+	    	return "question/memberqlist";
 	    }
 }
