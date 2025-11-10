@@ -8,8 +8,8 @@
 </head>
 <body>
 <%@include file="/WEB-INF/views/include/head.jsp" %>
-<div class="container mt-4">
-  <h3 class="fw-bold mb-3">공지사항 전체 보기</h3>
+<div class="container mt-3">
+  <h3 class="fw-semi-bold mb-3">공지사항</h3>
   <table class="table table-bordered table-hover text-center">
     <thead class="table-light">
       <tr>

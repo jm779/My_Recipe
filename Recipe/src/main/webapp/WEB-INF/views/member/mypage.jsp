@@ -6,25 +6,20 @@
   <title>마이페이지</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-
 <!-- 푸터고정 -->
 <body class="d-flex flex-column min-vh-100">
-
- 
+<jsp:include page="../include/head.jsp" />
   <main class="flex-grow-1">
     <div class="container my-2">
-      <jsp:include page="../include/head.jsp" />
-
       <div class="container my-4">
       	<c:set var="userid" value="${userid}" />
         <h3 class="mb-4">내가 작성한 레시피</h3>
-
         <c:set var="start" value="${(pager.page - 1) * pager.perPage}" />
         <c:set var="end" value="${start + pager.perPage - 1}" />
 
         <div class="row">
           <c:set var="count" value="0" />
-          <c:forEach var="cook" items="${userList}">
+          <c:forEach var="cook" items="${pagedList}">
                 <div class="col-md-6 mb-4">
                   <form class="border p-4 h-100">
                     <div class="mb-3">
@@ -34,7 +29,7 @@
 
                     <div class="mb-3">
                       <label class="form-label"><strong>레시피 소개</strong></label>
-                      <input type="text" name="comment" class="form-control" value="${cook.comment}" readonly />
+                      <input type="text" name="rcomment" class="form-control" value="${cook.rcomment}" readonly />
                     </div>
 
                     <div class="mb-3">
@@ -53,7 +48,7 @@
           </c:forEach>
         </div>
         
-        <c:if test="${empty userList}">
+        <c:if test="${empty pagedList}">
           <div class="alert alert-info text-center">작성한 레시피가 없습니다.</div>
         </c:if>
         

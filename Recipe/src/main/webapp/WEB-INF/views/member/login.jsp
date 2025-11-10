@@ -6,16 +6,58 @@
   <meta charset="UTF-8">
   <title>로그인</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-
 <!-- 푸터 고정 -->
 <body class="d-flex flex-column min-vh-100">
+<header style="background-color: #f0f0f0;" class="py-4 border-bottom text-muted">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center gap-2">
+        <a href="/">
+          <img src="${pageContext.request.contextPath}/resources/image/logo.png" alt="logo" style="height:50px;">
+        </a>
+        <h2 class="mb-0 text-dark">RecipeTime</h2>
+        <script src="${pageContext.request.contextPath}/resources/js/mypage_move.js"></script>
+      </div>
 
+      <form action="search" method="get" class="col-md-3 d-flex gap-2"> 
+        <input type="text" name="query" placeholder="검색내용" class="form-control" />
+        <button type="submit" class="btn btn-primary" style="width: 100px;">검색</button>
+      </form>
+
+      <div>
+        <c:choose>
+          <c:when test="${sessionScope.member == null}">
+            <div class="d-flex gap-3">
+              <a href="/login" class="text-dark text-decoration-none">로그인</a>
+              <a href="/signup" class="text-dark text-decoration-none">회원가입</a>
+            </div>
+          </c:when>
+          <c:otherwise>
+            <div class="text-end">
+              <img src="${pageContext.request.contextPath}/resources/image/profile.png" alt="profile" style="height:40px;">
+              <div class="text-dark">${sessionScope.member.name}(${sessionScope.member.userid})님 환영합니다.</div>
+              <div style="position: relative;">
+                <a href="/logout" class="text-dark text-decoration-none">로그아웃</a> |
+                <a href="${pageContext.request.contextPath}/cook/add" class="text-dark text-decoration-none">레시피 등록</a> |
+                <a id="mp_move" href="${pageContext.request.contextPath}/member/mypage" class="text-dark text-decoration-none">마이페이지</a>
+                <div id="choose_help" style="width:79px; height:72px; position: absolute; 
+                        left:70%; top: 90%; background-color: #e0e0e0; text-align: center; display: none;">
+                    <a href="${pageContext.request.contextPath}/member/mypage" class="d-block text-dark text-decoration-none">내 작성글</a>
+                    <a href="${pageContext.request.contextPath}/question/memberqlist" class="d-block text-dark text-decoration-none">문의</a>
+                </div>
+              </div>
+            </div>
+          </c:otherwise>
+        </c:choose>
+      </div>
+    </div>
+  </div>
+</header>
 <!-- 본문 : main -->
   <main class="flex-grow-1">
     <div class="container">
-      <jsp:include page="/WEB-INF/views/include/head.jsp" />
-
       <!-- 로그인 -->
       <div class="d-flex justify-content-center mt-5">
         <div class="w-50">

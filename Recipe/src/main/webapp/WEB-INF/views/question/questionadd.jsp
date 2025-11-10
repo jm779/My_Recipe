@@ -9,13 +9,11 @@
 
 <!-- 푸터 고정 -->
 <body class="d-flex flex-column min-vh-100">
-
+<jsp:include page="../include/head.jsp" />
   <main class="flex-grow-1">
     <!-- 헤더 포함 -->
     <div class="container my-2">
-      <jsp:include page="../include/head.jsp" />
     </div>
-
     <!-- 문의 작성 폼 -->
     <div class="container mt-5" style="max-width: 800px;">
       <div class="d-flex text-center mb-4">
@@ -38,7 +36,7 @@
 
         <div class="text-end">
           <button type="submit" class="btn btn-primary">등록</button>
-          <a href="${pageContext.request.contextPath}/inquiry/list" class="btn btn-secondary">목록</a>
+          <a href="${pageContext.request.contextPath}/question/qlist" class="btn btn-secondary">목록</a>
         </div>
       </form>
     </div>

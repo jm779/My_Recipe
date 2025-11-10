@@ -1,65 +1,43 @@
 window.addEventListener("load", () => {
-    const container = document.querySelector("#main_img_container");
-    const uploadBtn = document.querySelector("#main_img");
-    const reselectBtn = document.querySelector("#reselect_img");
-    const hint = container.querySelector("#img_change");
-    const input = document.getElementById("mainfile");
+  const container = document.querySelector("#main_img_container");
+  const uploadBtn = document.querySelector("#main_img");
+  const input = document.getElementById("mainfile");
 
-    function triggerUpload(){
-        input.value = "";
-        input.click();
-    }
-    
-    function previewImage(file){
-        const reader = new FileReader();
-            reader.onload = function (e) {
-                const existingImg = container.querySelector("img.preview");
-                if (existingImg) {
-                    existingImg.remove();
-                }
+  function triggerUpload() {
+    input.value = "";
+    input.click();
+  }
 
-                const img = document.createElement("img");
-                img.src = e.target.result;
-                img.classList.add("preview");
-                img.style.position = "absolute";
-                img.style.top = "0";
-                img.style.left = "0";
-                img.style.width = "100%";
-                img.style.height = "auto";
-                img.style.objectFit = "contain";
-                img.style.cursor = "pointer";
-                img.style.zIndex = "1";
+  function previewImage(file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const existingImg = container.querySelector("img.preview");
+      if (existingImg) existingImg.remove();
 
+      const img = document.createElement("img");
+      img.src = e.target.result;
+      img.classList.add("preview");
+      Object.assign(img.style, {
+        position: "absolute",
+        top: "0",
+        left: "0",
+        width: "100%",
+        height: "100%",
+        objectFit: "contain",
+        cursor: "pointer",
+        zIndex: "1",
+      });
 
-                img.addEventListener("click", () => {
-                    uploadBtn.click();
-                });
+      img.addEventListener("click", () => uploadBtn.click());
+      container.appendChild(img);
+    };
+    reader.readAsDataURL(file);
+  }
 
-                container.appendChild(img);
-                uploadBtn.style.display = "none";
-                reselectBtn.style.display = "block";
+  input.addEventListener("change", () => {
+    const file = input.files[0];
+    if (file) previewImage(file);
+  });
 
-                if (hint) {
-                    hint.style.display = "none";
-                }
-            };
-            reader.readAsDataURL(file);
-        }
-    
-        input.addEventListener("change", () => {
-            const file = input.files[0];
-            if(file){
-                previewImage(file);
-            }
-        });
-
-    uploadBtn.addEventListener("click", triggerUpload);
-    reselectBtn.addEventListener("click", triggerUpload);
-
-    //초기, 기존 이미지가 있으면 버튼 상태 조정
-    const existingImg = container.querySelector("img.preview");
-    if (existingImg) {
-        uploadBtn.style.display = "none";
-        reselectBtn.style.display = "block";
-    }
+  uploadBtn.addEventListener("click", triggerUpload);
 });

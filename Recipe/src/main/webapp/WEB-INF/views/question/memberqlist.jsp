@@ -6,13 +6,11 @@
   <title>문의목록</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-
 <body class="d-flex flex-column min-vh-100">
+<jsp:include page="../include/head.jsp" />
   <main class="flex-grow-1">
     <div class="container my-2">
-      <jsp:include page="../include/head.jsp" />
       <div class="mt-4 mb-3"><h3>내 문의 내역</h3></div>
-
       <!-- 문의 목록 테이블 -->
       <table class="table table-sm" border="1">
         <thead>
@@ -24,13 +22,13 @@
           </tr>
         </thead>
         <tbody>
-          <c:forEach var="cook" items="${list}">
-            <c:if test="${cook.userid == sessionScope.userid}">
+          <c:forEach var="question" items="${list}">
+            <c:if test="${question.userid == sessionScope.userid}">
               <tr>
-                <td>${cook.recipeid}</td>
-                <td>${cook.recipetitle}</td>
-                <td>${cook.comment}</td>
-                <td>${cook.link}</td>
+                <td>${question.questionid}</td>
+                <td>${question.qtitle}</td>
+                <td>${question.qcontent}</td>
+                <td>${question.qdate}</td>
               </tr>
             </c:if>
           </c:forEach>

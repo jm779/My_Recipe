@@ -29,7 +29,6 @@
 	<interceptors>
       <interceptor>
          <mapping path="/post/**"/>
-         
          <beans:bean class="kr.ac.kopo.recipe.interceptor.UserInterceptor"></beans:bean>
       </interceptor>
    </interceptors>

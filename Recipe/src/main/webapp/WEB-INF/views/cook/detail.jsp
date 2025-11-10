@@ -8,12 +8,10 @@
 </head>
 <!-- 푸터고정 -->
 <body class="d-flex flex-column min-vh-100">
-
+<jsp:include page="../include/head.jsp" />
   <main class="flex-grow-1">
-    <div class="container my-2">
-      <jsp:include page="../include/head.jsp" />
+    <div class="container my-2">   
     </div>
-
     <div class="container mt-5" style="max-width: 800px;">
       <div class="d-flex text-center mb-4">
         <a href="${pageContext.request.contextPath}/">
@@ -30,12 +28,12 @@
 
         <div class="mb-3">
           <label class="form-label"><strong>레시피 소개</strong></label>
-          <input type="text" class="form-control" value="${item.comment}" readonly />
+          <input type="text" class="form-control" value="${item.rcomment}" readonly />
         </div>
         
 		<div class="mb-3">	
 			<label class="form-label"><strong>대표사진</strong></label>				
-			<div style="width: 450px; height: 250px; background-color: #e0e0e0; margin-bottom: 10px; overflow:hidden;">
+			<div style="width: 500px; height: 300px; background-color: #e0e0e0; margin-bottom: 10px; overflow:hidden;">
 	        	<img src="${pageContext.request.contextPath}${item.mainimagepath}" alt="camera_icon"
 	        			style="width: 100%; height: 100%; margin-top: 2px; object-fit: cover;">
 	        </div>
@@ -84,7 +82,7 @@
     <div class="d-flex justify-content-center gap-3 my-4">
   	<!-- 추천 레시피 등록 버튼 -->
 	  <form action="/cook/recommend" method="post">
-	  	<input type="hidden" name="recommendnum" value="${item.recipeid}" />
+	  	<input type="hidden" name="recipeid" value="${item.recipeid}" />
 	    <button type="submit" class="btn btn-outline-danger d-flex align-items-center px-3">
 	      <img src="${pageContext.request.contextPath}/resources/image/recommend_enroll.png" alt="recommend"
 	           style="width: 20px; height: 20px; margin-right: 8px;">
